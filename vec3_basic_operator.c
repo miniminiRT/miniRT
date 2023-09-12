@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:01:55 by jonhan            #+#    #+#             */
-/*   Updated: 2023/09/12 15:16:46 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/09/12 16:05:30 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,4 @@ t_vec3	vec3_divide(t_vec3 v, double t)
 
 	inv_t = 1.0 / t;
 	return (vec3_multiply(v, inv_t));
-}
-
-double vec3_length(t_vec3 v)
-{
-	return (sqrt(vec3_length_squared(v)));
-}
-
-double vec3_length_squared(t_vec3 v) {
-    return v.e[0] * v.e[0] + v.e[1] * v.e[1] + v.e[2] * v.e[2];
 }
