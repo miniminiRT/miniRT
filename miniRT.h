@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 13:32:19 by jonhan            #+#    #+#             */
-/*   Updated: 2023/09/12 13:34:00 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/09/12 14:18:25 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+
+typedef struct e_vec3
+{
+	double	e[3];
+}	t_vec3;
 
 
 
