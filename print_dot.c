@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_vector_operator.c                             :+:      :+:    :+:   */
+/*   print_dot.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 15:15:55 by jonhan            #+#    #+#             */
-/*   Updated: 2023/09/13 16:35:34 by jonhan           ###   ########.fr       */
+/*   Created: 2023/09/13 16:38:43 by jonhan            #+#    #+#             */
+/*   Updated: 2023/09/13 16:40:00 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-double	vec3_length_squared(t_vec3 v)
+void	print_image()
 {
-	return (v.e[0] * v.e[0] + v.e[1] * v.e[1] + v.e[2] * v.e[2]);
+	
 }
-
-double	vec3_length(t_vec3 v)
-{
-	return (sqrt(vec3_length_squared(v)));
-}
-
