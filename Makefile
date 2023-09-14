@@ -28,7 +28,7 @@ all:		$(NAME)
 
 $(NAME):  $(OBJ) $(HEADER) $(MLX)
 		cp ./$(MLX_DIR)/$(MLX) $(MLX)
-		$(CC) $(CFLAGS) $(OPTION) $(OBJS) $(MLX) -o $(NAME) -I$(HEADER)
+		$(CC) $(CFLAGS) $(OPTION) $(OBJ) $(MLX) -o $(NAME) -I$(HEADER)
 		@echo $(GREEN)"miniRT made." $(EOC)
 # @$(CC) $(OBJ) -o $(NAME)
 
