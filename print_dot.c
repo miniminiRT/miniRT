@@ -6,13 +6,13 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:38:43 by jonhan            #+#    #+#             */
-/*   Updated: 2023/09/13 16:40:00 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/12 19:39:10 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	print_image()
-{
+// void	print_image()
+// {
 	
-}
+// }

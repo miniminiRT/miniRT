@@ -13,7 +13,7 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 #-------------------------------------------
 
-SRC			=	*.c
+SRC			=	sphere.c vec3_basic_operator.c vec3_scala_operator.c vec3_vector_operator.c
 OBJ			=	$(SRC:.c=.o)
 MLX_DIR 	= minilibx
 MLX			= libmlx.a
@@ -28,12 +28,12 @@ all:		$(NAME)
 
 $(NAME):  $(OBJ) $(HEADER) $(MLX)
 		cp ./$(MLX_DIR)/$(MLX) $(MLX)
-		$(CC) $(CFLAGS) $(OPTION) $(OBJ) $(MLX) -o $(NAME) -I$(HEADER)
+		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(OBJ) $(MLX) -o $(NAME) -I$(HEADER)
 		@echo $(GREEN)"miniRT made." $(EOC)
 # @$(CC) $(OBJ) -o $(NAME)
 
 %.o: 		%.c
-		@$(CC) $(CFLAGS) -c $< -o $@
+		@$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
 	
 $(MLX):
 	make -C $(MLX_DIR)

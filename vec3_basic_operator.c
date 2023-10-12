@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:01:55 by jonhan            #+#    #+#             */
-/*   Updated: 2023/09/12 16:05:30 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/12 19:42:03 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_vec3	vec3_init(void)
 	v.e[0] = 0.0;
 	v.e[1] = 0.0;
 	v.e[2] = 0.0;
+	return v;
 }
 
 t_vec3	vec3_create(double e0, double e1, double e2)

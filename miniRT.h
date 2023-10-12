@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 13:32:19 by jonhan            #+#    #+#             */
-/*   Updated: 2023/09/13 16:54:12 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/12 18:58:06 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 # include <mlx.h>
 
-typedef struct e_vec3
+typedef struct s_vec3
 {
 	double	e[3];
 }	t_vec3;
@@ -30,6 +30,20 @@ typedef struct s_vars
 	void		*win;
 }	t_vars;
 
+typedef struct s_point3
+{
+	double	x;
+	double	y;
+	double	z;
+	int		color;
+}	t_point3;
+
+typedef struct s_ray
+{
+	t_vec3		dir;
+	t_vec3	origin;
+}	t_ray;
+
 typedef struct s_data
 {
 	void	*img;
@@ -39,19 +53,12 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
-typedef struct s_xy
-{
-	double	x;
-	double	y;
-	double	z;
-	int		color;
-}	t_xy;
 
 typedef struct s_map
 {
-	t_xy	**map;
-	int		width;
-	int		height;
+	t_point3	**map;
+	int			width;
+	int			height;
 	// int		img_width;
 	// int		img_height;
 }	t_map;
@@ -65,5 +72,9 @@ t_vec3	vec3_add(t_vec3 v1, t_vec3 v2);
 t_vec3	vec3_multiply(t_vec3 v1, double t);
 t_vec3	vec3_divide(t_vec3 v, double t);
 
-
+t_vec3 multiply_scalar_vec3(double t, t_vec3* v);
+t_vec3 multiply_vec3_scalar(t_vec3* v, double t);
+double dot_product(t_vec3* u, t_vec3* v);
+t_vec3 cross_product(t_vec3* u, t_vec3* v);
+t_vec3 normalize_vec3(t_vec3* v);
 #endif
