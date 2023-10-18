@@ -13,7 +13,7 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 #-------------------------------------------
 
-SRC			=	sphere.c vec3_basic_operator.c vec3_scala_operator.c vec3_vector_operator.c
+SRC			=	back.c sphere.c vec3_basic_operator.c vec3_scala_operator.c vec3_vector_operator.c
 OBJ			=	$(SRC:.c=.o)
 MLX_DIR 	= minilibx
 MLX			= libmlx.a
@@ -22,7 +22,8 @@ OPTION 		= -L./ -lmlx -framework OpenGL -framework AppKit
 NAME		= miniRT
 CC			= cc
 RM 			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		=
+#  -Wall -Wextra -Werror
 
 all:		$(NAME)
 
