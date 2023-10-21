@@ -22,8 +22,7 @@ OPTION 		= -L./ -lmlx -framework OpenGL -framework AppKit
 NAME		= miniRT
 CC			= cc
 RM 			= rm -rf
-CFLAGS		=
-#  -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 
 all:		$(NAME)
 
