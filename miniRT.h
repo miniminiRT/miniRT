@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/22 10:22:21 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/22 15:14:03 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_scene{
 	t_object	*lights;
 	t_ray		ray;
 	t_vec		ambient;
-	// t_hit_record	rec;
+	t_hit_record	rec;
 }	t_scene;
 
 t_vec	vec(double x, double y, double z);
@@ -114,15 +114,12 @@ double	vec_dot(t_vec v1, t_vec v2);
 t_vec	vec_cross(t_vec v1, t_vec v2);
 t_vec	vec_unit(t_vec v);
 
-
-
-
-
-
-
-
-
-
-
+t_vec	vec_mul_vec(t_vec v1, t_vec v2);
+t_ray	ray(t_vec origin, t_vec dir);
+int		hit(t_scene *scene, t_ray r, t_hit_record *rec);
+int		in_shadow(t_scene *scene, t_ray r, double light_len);
+t_vec	reflect(t_vec v, t_vec n);
+t_vec	point_light_get(t_scene *scene, t_light *light);
+t_vec	phong_light(t_scene	*scene);
 
 #endif
