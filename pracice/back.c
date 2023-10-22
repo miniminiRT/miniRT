@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 12:04:49 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/18 22:12:43 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/22 13:17:12 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ t_vec3 phong_lighting(t_hit_record rec, t_sphere *sphere, t_ray r)
 	}
 	light_color = vec3_add(light_color, ambient);
 	return (vmin(vec3_multiply_vec3(light_color, rec.albedo), vec3_create(1,1,1)));
+	//모든 광원에 의한 빛의 양을 구한 후, 오브젝트의 반사율과 곱해준다. 그 값이 (1,1,1)넘으면 1,1,1리턴
 }
 
 t_vec3 ray_color(t_ray r)
