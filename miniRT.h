@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "mlxset.h"
 
 enum e_type{
 	SPHERE,
@@ -35,9 +36,16 @@ typedef struct s_vec{
 typedef struct s_viewport{
 	int		width;
 	int		height;
-	double	aspect_ratio;
+	double	focal_length;	
+	// double	aspect_ratio;
 }	t_viewport;
 
+typedef struct s_size
+{
+    int     width;
+    int     height;
+    double  aspect_ratio;
+}   t_size;
 
 typedef struct s_camera{
 	t_vec	origin;
@@ -87,6 +95,7 @@ typedef struct s_hit_record{
 typedef struct s_scene{
 	t_viewport	viewport;
 	t_camera	camera;
+	t_size		size;
 	t_object	*objects;
 	t_object	*lights;
 	t_ray		ray;
