@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/21 15:12:04 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/22 10:22:21 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,27 @@ typedef struct s_scene{
 	t_vec		ambient;
 	// t_hit_record	rec;
 }	t_scene;
+
+t_vec	vec(double x, double y, double z);
+t_vec	vec_add(t_vec v1, t_vec v2);
+t_vec	vec_sub(t_vec v1, t_vec v2);
+t_vec	vec_mul(t_vec v1, double t);
+t_vec	vec_div(t_vec v1, double t);
+
+double	vec_length(t_vec v1);
+double	vec_dot(t_vec v1, t_vec v2);
+t_vec	vec_cross(t_vec v1, t_vec v2);
+t_vec	vec_unit(t_vec v);
+
+
+
+
+
+
+
+
+
+
+
 
 #endif
