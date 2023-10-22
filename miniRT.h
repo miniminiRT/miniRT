@@ -122,4 +122,23 @@ t_vec	reflect(t_vec v, t_vec n);
 t_vec	point_light_get(t_scene *scene, t_light *light);
 t_vec	phong_light(t_scene	*scene);
 
+// vec_operator1
+t_vec	vec(double x, double y, double z);
+t_vec	vec_add(t_vec v1, t_vec v2);
+t_vec	vec_sub(t_vec v1, t_vec v2);
+t_vec	vec_mul(t_vec v1, double t);
+t_vec	vec_div(t_vec v1, double t);
+t_vec	ray_at(t_ray ray, double t);
+
+// vec_operator2
+double	length_squared(double x, double y, double z);
+double	vec_length(t_vec v1);
+double	vec_dot(t_vec v1, t_vec v2);
+t_vec	vec_cross(t_vec v1, t_vec v2);
+t_vec	vec_unit(t_vec v);
+
+// vec_operator3
+t_vec	vec_mul_vec(t_vec v1, t_vec v2);
+t_vec	vec_min(t_vec v1, t_vec v2);
+
 #endif

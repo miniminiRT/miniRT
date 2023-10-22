@@ -61,7 +61,7 @@ int ray_color(t_ray ray, t_scene scene)
         is_hit = hit_sphere(&(scene.rec), scene.ray, obj_list->element);
         if (is_hit == 1)
         {
-            color = phong_lighting(&scene);
+            color = phong_light(&scene);
             scene.rec.tmax = scene.rec.t;
         }
         obj_list = obj_list->next;
