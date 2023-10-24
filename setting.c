@@ -44,6 +44,9 @@ void	set_lights(t_scene *scene, char **res)
 	t_light	*lights;
 	char **origin;
 	char **light_color;
+	t_light *iter;
+
+	iter = scene->lights;
 
 	lights = malloc(sizeof(t_light));
 	if (!lights)
@@ -54,6 +57,14 @@ void	set_lights(t_scene *scene, char **res)
 	lights->brightness = ft_atoi(res[2]);
 	lights->light_color = vec(ft_atoi(light_color[0]), ft_atoi(light_color[1]), ft_atoi(light_color[2]));;
 	lights->next = NULL;
+	// if (!iter)
+	// 	iter = lights;
+	// else
+	// {
+	// 	while (iter->next != NULL)
+	// 		iter = iter->next;
+	// 	iter->next = lights;
+	// }
 	if (!scene->lights)
 		scene->lights = lights;
 	else
@@ -193,6 +204,13 @@ void set_objects(t_scene *scene, char **res)
 	return ;
 }
 
+void	init_scene(t_scene *scene)
+{
+	scene->objects = NULL;
+	scene->lights = NULL;
+
+}
+
 t_scene set_scene(void)
 {
 	t_scene scene;
@@ -202,6 +220,7 @@ t_scene set_scene(void)
 
 	fd = open("example.rt", O_RDONLY);
 	str = get_next_line(fd);
+	init_scene(&scene);
 	while (str)
 	{
 		res = ft_split(str,' ');

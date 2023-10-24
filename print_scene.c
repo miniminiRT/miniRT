@@ -25,6 +25,7 @@ int hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
     b = 2.0 * vec_dot(oc, ray.dir);
     c = vec_dot(oc, oc) - (sp->radius * sp->radius);
     discriminant = b * b - 4 * a * c;
+    printf("%f\n", sp->radius);
 	if (discriminant < 0)  // 판별식이 음수이면 해가 없음.
 		return (0);
     sqrtd = sqrt(discriminant);
@@ -57,8 +58,8 @@ int ray_color(t_ray ray, t_scene scene)
     obj_list = scene.objects;
     while (obj_list)
     {
-        // obj_list.type == SPHERE
-        is_hit = hit_sphere(&(scene.rec), ray, obj_list->element);
+        if (obj_list->type == SPHERE)
+            is_hit = hit_sphere(&(scene.rec), ray, obj_list->element);
         if (is_hit == 1)
         {
             color = phong_light(&scene);
