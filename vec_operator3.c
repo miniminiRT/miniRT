@@ -21,3 +21,22 @@ t_vec	vec_mul_vec(t_vec v1, t_vec v2)
 	v.z = v1.z * v2.z;
 	return (v);
 }
+
+t_vec	vec_min(t_vec v1, t_vec v2)
+{
+	t_vec	new;
+
+	if (v1.x < v2.x)
+		new.x = v1.x;
+	else
+		new.x = v2.x;
+	if (v1.y < v2.y)
+		new.y = v1.y;
+	else
+		new.y = v2.y;
+	if (v1.z < v2.z)
+		new.z = v1.z;
+	else
+		new.z = v2.z;
+	return (new);
+}
