@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/22 15:12:47 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/24 14:44:35 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_vec	point_light_get(t_scene *scene, t_light *light)
 	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), ksn);
 	specular = vec_mul(vec_mul(light->light_color, ks), spec);
 	brightness = light->brightness * LUMEN;
-	light_sum = vec_add(vec_add(scene->ambient, diffuse), specular);
+	light_sum = vec_add(vec_add(scene->ambient.color, diffuse), specular);
 	return (vec_mul(light_sum, brightness));
 }
 
@@ -70,11 +70,10 @@ t_vec	phong_light(t_scene	*scene)
 
 	while (scene->lights)
 	{
-		if (scene->lights->type == LIGHT)
-			light_color = vec_add(light_color, point_light_get(scene, scene->lights->element));
+		light_color = vec_add(light_color, point_light_get(scene, scene->lights));
 		scene->lights = scene->lights->next;
 	}
-	light_color = vec_add(light_color, scene->ambient);
+	light_color = vec_add(light_color, scene->ambient.color);
 	light_sum = vec_mul_vec(light_color, scene->rec.albedo);
 	return (vec_min(light_sum, vec(1, 1, 1)));
 }

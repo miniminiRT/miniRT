@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:10:01 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/22 15:11:02 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/24 14:45:24 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	hit(t_scene *scene, t_ray r, t_hit_record *rec)
 	hit_anything = 0;
 	while (scene->objects)
 	{
-		if (hit_sphere())
+		if (hit_sphere(rec, r, scene->objects->element))
 		{
 			hit_anything = 1;
 			tmp_rec.tmax = tmp_rec.t;

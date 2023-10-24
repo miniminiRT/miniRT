@@ -58,7 +58,7 @@ int ray_color(t_ray ray, t_scene scene)
     while (obj_list)
     {
         // obj_list.type == SPHERE
-        is_hit = hit_sphere(&(scene.rec), scene.ray, obj_list->element);
+        is_hit = hit_sphere(&(scene.rec), ray, obj_list->element);
         if (is_hit == 1)
         {
             color = phong_light(&scene);
