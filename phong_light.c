@@ -43,12 +43,11 @@ t_vec	point_light_get(t_scene *scene, t_light *light)
 	t_ray	light_ray;
 	double	light_len;
 
-	light_dir = vec_sub(light->origin, scene->rec.p);
+	light_dir = vec_unit(vec_sub(light->origin, scene->rec.p));
 	light_len = vec_length(light_dir);
 	light_ray = ray(vec_add(scene->rec.p, vec_mul(scene->rec.normal, EPSILON)), light_dir);
 	if (in_shadow(scene, light_ray, light_len))
 		return (vec(0, 0, 0));
-	light_dir = vec_unit(vec_sub(light->origin, scene->rec.p));
 	kd = fmax(vec_dot(scene->rec.normal, light_dir), 0.0);
 	diffuse = vec_mul(light->light_color, kd);
 	view_dir = vec_unit(vec_mul(scene->ray.dir, -1));
@@ -57,8 +56,9 @@ t_vec	point_light_get(t_scene *scene, t_light *light)
 	ks = 0.5;
 	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), ksn);
 	specular = vec_mul(vec_mul(light->light_color, ks), spec);
-	brightness = light->brightness * LUMEN;
-	light_sum = vec_add(vec_add(scene->ambient.color, diffuse), specular);
+	// brightness = light->brightness * LUMEN;
+	brightness = 1.5;
+	light_sum = vec_add(diffuse, specular);
 	return (vec_mul(light_sum, brightness));
 }
 
@@ -68,12 +68,14 @@ t_vec	phong_light(t_scene	*scene)
 	t_vec	light_color;
 	t_vec	light_sum;
 
+	light_color = vec(0, 0, 0);
 	while (scene->lights)
 	{
 		light_color = vec_add(light_color, point_light_get(scene, scene->lights));
 		scene->lights = scene->lights->next;
 	}
 	light_color = vec_add(light_color, scene->ambient.color);
-	light_sum = vec_mul_vec(light_color, scene->rec.albedo);
+	// light_sum = vec_mul_vec(light_color, scene->rec.albedo);
+	light_sum = vec_mul_vec(light_color, vec(0, 0, 0.5));
 	return (vec_min(light_sum, vec(1, 1, 1)));
 }
