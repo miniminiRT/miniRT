@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "mlxset.h"
 
 enum e_type{
 	SPHERE,
@@ -35,9 +36,16 @@ typedef struct s_vec{
 typedef struct s_viewport{
 	int		width;
 	int		height;
-	double	aspect_ratio;
+	double	focal_length;	
+	// double	aspect_ratio;
 }	t_viewport;
 
+typedef struct s_size
+{
+    int     width;
+    int     height;
+    double  aspect_ratio;
+}   t_size;
 
 typedef struct s_camera{
 	t_vec	origin;
@@ -87,6 +95,7 @@ typedef struct s_hit_record{
 typedef struct s_scene{
 	t_viewport	viewport;
 	t_camera	camera;
+	t_size		size;
 	t_object	*objects;
 	t_object	*lights;
 	t_ray		ray;
@@ -112,5 +121,24 @@ int		in_shadow(t_scene *scene, t_ray r, double light_len);
 t_vec	reflect(t_vec v, t_vec n);
 t_vec	point_light_get(t_scene *scene, t_light *light);
 t_vec	phong_light(t_scene	*scene);
+
+// vec_operator1
+t_vec	vec(double x, double y, double z);
+t_vec	vec_add(t_vec v1, t_vec v2);
+t_vec	vec_sub(t_vec v1, t_vec v2);
+t_vec	vec_mul(t_vec v1, double t);
+t_vec	vec_div(t_vec v1, double t);
+t_vec	ray_at(t_ray ray, double t);
+
+// vec_operator2
+double	length_squared(double x, double y, double z);
+double	vec_length(t_vec v1);
+double	vec_dot(t_vec v1, t_vec v2);
+t_vec	vec_cross(t_vec v1, t_vec v2);
+t_vec	vec_unit(t_vec v);
+
+// vec_operator3
+t_vec	vec_mul_vec(t_vec v1, t_vec v2);
+t_vec	vec_min(t_vec v1, t_vec v2);
 
 #endif

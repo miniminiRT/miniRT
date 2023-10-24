@@ -76,5 +76,5 @@ t_vec	phong_light(t_scene	*scene)
 	}
 	light_color = vec_add(light_color, scene->ambient);
 	light_sum = vec_mul_vec(light_color, scene->rec.albedo);
-	return (vmin(light_sum, vec(1, 1, 1)));
+	return (vec_min(light_sum, vec(1, 1, 1)));
 }
