@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/22 15:14:03 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/24 15:01:24 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "mlxset.h"
+# include "libft/libft.h"
 
 enum e_type{
 	SPHERE,
@@ -30,6 +31,7 @@ typedef struct s_vec{
 	double	x;
 	double	y;
 	double	z;
+
 }	t_vec;
 
 
@@ -50,6 +52,7 @@ typedef struct s_size
 typedef struct s_camera{
 	t_vec	origin;
 	t_vec	dir;
+	double	degree;
 }	t_camera;
 
 typedef struct s_object{
@@ -65,10 +68,33 @@ typedef struct s_sphere{
 	double	radius;
 }	t_sphere;
 
+typedef	struct s_plane
+{
+	t_vec	point;
+	t_vec	normal;
+	t_vec	color;
+}	t_plane;
+
+typedef	struct s_cylinder
+{
+	t_vec	center;
+	t_vec	normal;
+	double	radius;
+	double	height;
+	t_vec	color;
+}	t_cylinder;
+
+
+typedef	struct	s_ambient{
+	t_vec	color;
+	double	light_ratio;
+}	t_ambient;
+
 typedef struct s_light{
 	t_vec	origin;
 	t_vec	light_color;
 	double	brightness;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_ray{
@@ -97,9 +123,9 @@ typedef struct s_scene{
 	t_camera	camera;
 	t_size		size;
 	t_object	*objects;
-	t_object	*lights;
+	t_light		*lights;
 	t_ray		ray;
-	t_vec		ambient;
+	t_ambient	ambient;
 	t_hit_record	rec;
 }	t_scene;
 
@@ -117,6 +143,7 @@ t_vec	vec_unit(t_vec v);
 t_vec	vec_mul_vec(t_vec v1, t_vec v2);
 t_ray	ray(t_vec origin, t_vec dir);
 int		hit(t_scene *scene, t_ray r, t_hit_record *rec);
+int		hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp);
 int		in_shadow(t_scene *scene, t_ray r, double light_len);
 t_vec	reflect(t_vec v, t_vec n);
 t_vec	point_light_get(t_scene *scene, t_light *light);
@@ -140,5 +167,9 @@ t_vec	vec_unit(t_vec v);
 // vec_operator3
 t_vec	vec_mul_vec(t_vec v1, t_vec v2);
 t_vec	vec_min(t_vec v1, t_vec v2);
+
+t_scene set_scene(void);
+void print_scene(t_scene scene, t_data image);
+void	my_mlx(t_data *data, int x, int y, int color);
 
 #endif

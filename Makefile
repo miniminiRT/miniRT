@@ -13,12 +13,13 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 #-------------------------------------------
 
-SRC			=	back.c sphere.c vec3_basic_operator.c vec3_scala_operator.c vec3_vector_operator.c
+SRC			=	main.c phong_light.c print_scene.c ray.c setting.c shadow.c vec_operator1.c vec_operator2.c vec_operator3.c
 OBJ			=	$(SRC:.c=.o)
 MLX_DIR 	= minilibx
 MLX			= libmlx.a
 HEADER		= miniRT.h
 OPTION 		= -L./ -lmlx -framework OpenGL -framework AppKit
+LIBFT = ./libft/libft.a
 NAME		= miniRT
 CC			= cc
 RM 			= rm -rf
@@ -28,7 +29,7 @@ all:		$(NAME)
 
 $(NAME):  $(OBJ) $(HEADER) $(MLX)
 		cp ./$(MLX_DIR)/$(MLX) $(MLX)
-		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(OBJ) $(MLX) -o $(NAME) -I$(HEADER)
+		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) -I$(HEADER)
 		@echo $(GREEN)"miniRT made." $(EOC)
 # @$(CC) $(OBJ) -o $(NAME)
 
