@@ -66,7 +66,7 @@ void	set_lights(t_scene *scene, char **res)
 	//free 만히 해줘야댐
 }
 
-void	set_sphere(t_scene *scene, char **res)
+void	set_sphere(t_scene *scene, char **res, int *id)
 {
 	char	**center;
 	t_sphere	*sphere;
@@ -84,6 +84,7 @@ void	set_sphere(t_scene *scene, char **res)
 	{
 		object = malloc(sizeof(t_object));
 		//
+		object->id = *id;
 		object->type = SPHERE;
 		object->element = (void *)sphere;
 		object->next = NULL;
@@ -95,6 +96,7 @@ void	set_sphere(t_scene *scene, char **res)
 			scene->objects = scene->objects->next;
 		object = malloc(sizeof(t_object));
 		//
+		object->id = *id;
 		object->type = SPHERE;
 		object->element = (void *)sphere;
 		object->next = NULL;
@@ -103,7 +105,7 @@ void	set_sphere(t_scene *scene, char **res)
 	//프리 많이 해야댐
 }
 
-void	set_plane(t_scene *scene, char **res)
+void	set_plane(t_scene *scene, char **res, int *id)
 {
 	char **point;
 	char **normal;
@@ -123,6 +125,7 @@ void	set_plane(t_scene *scene, char **res)
 	{
 		object = malloc(sizeof(t_object));
 		//
+		object->id = *id;
 		object->type = PLANE;
 		object->element = (void *)plane;
 		object->next = NULL;
@@ -134,6 +137,7 @@ void	set_plane(t_scene *scene, char **res)
 			scene->objects = scene->objects->next;
 		object = malloc(sizeof(t_object));
 		//
+		object->id = *id;
 		object->type = PLANE;
 		object->element = (void *)plane;
 		object->next = NULL;
@@ -142,7 +146,7 @@ void	set_plane(t_scene *scene, char **res)
 	//프리 많이 해야댐
 }
 
-void	set_cylinder(t_scene *scene, char **res)
+void	set_cylinder(t_scene *scene, char **res, int *id)
 {
 	char **center;
 	char **normal;
@@ -163,6 +167,7 @@ void	set_cylinder(t_scene *scene, char **res)
 	{
 		object = malloc(sizeof(t_object));
 		//
+		object->id = *id;
 		object->type = CYLINDER;
 		object->element = (void *)cylinder;
 		object->next = NULL;
@@ -174,6 +179,7 @@ void	set_cylinder(t_scene *scene, char **res)
 			scene->objects = scene->objects->next;
 		object = malloc(sizeof(t_object));
 		//
+		object->id = *id;
 		object->type = CYLINDER;
 		object->element = (void *)cylinder;
 		object->next = NULL;
@@ -183,14 +189,15 @@ void	set_cylinder(t_scene *scene, char **res)
 }
 
 
-void set_objects(t_scene *scene, char **res)
+void set_objects(t_scene *scene, char **res, int *id)
 {
 	if (ft_strncmp(res[0], "sp", 2) == 0)
-		set_sphere(scene, res);
+		set_sphere(scene, res, id);
 	else if (ft_strncmp(res[0], "pl", 2) == 0)
-		set_plane(scene, res);
+		set_plane(scene, res, id);
 	else if (ft_strncmp(res[0], "cy", 2) == 0)
-		set_cylinder(scene, res);
+		set_cylinder(scene, res, id);
+	(*id)++;
 	return ;
 }
 
@@ -207,7 +214,9 @@ t_scene set_scene(void)
 	char    *str;
 	char    **res;
 	int     fd;
+	int		id;
 
+	id = 0;
 	fd = open("example.rt", O_RDONLY);
 	str = get_next_line(fd);
 	init_scene(&scene);
@@ -224,7 +233,7 @@ t_scene set_scene(void)
 		else if (ft_strncmp(res[0], "L", 1) == 0)
 			set_lights(&scene, res);
 		else
-			set_objects(&scene, res);
+			set_objects(&scene, res, &id);
 		free(str);
 		//res프리
 		str = get_next_line(fd);

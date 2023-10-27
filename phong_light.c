@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/27 19:54:06 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:37:45 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vec	reflect(t_vec v, t_vec n)
 	return (result);
 }
 
-t_vec	point_light_get(t_scene *scene, t_light *light)
+t_vec	point_light_get(t_scene *scene, t_light *light, int id)
 {
 	t_vec	diffuse;
 	t_vec	light_dir;
@@ -46,7 +46,7 @@ t_vec	point_light_get(t_scene *scene, t_light *light)
 	light_dir = vec_sub(light->origin, scene->rec.p);
 	light_len = vec_length(light_dir);
 	light_ray = ray(vec_add(scene->rec.p, vec_mul(scene->rec.normal, EPSILON)), light_dir);
-	if (in_shadow(scene, light_ray, light_len))
+	if (in_shadow(scene, light_ray, light_len, id))
 		return (vec(0, 0, 0));	
 	light_dir = vec_unit(light_dir);
 	kd = fmax(vec_dot(scene->rec.normal, light_dir), 0.0);
@@ -57,14 +57,13 @@ t_vec	point_light_get(t_scene *scene, t_light *light)
 	ks = 0.5;
 	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), ksn);
 	specular = vec_mul(vec_mul(light->light_color, ks), spec);
-	// brightness = light->brightness * LUMEN;
-	brightness = 1.5;
+	brightness = light->brightness * LUMEN;
 	light_sum = vec_add(diffuse, specular);
 	return (vec_mul(light_sum, brightness));
 }
 
 
-t_vec	phong_light(t_scene	*scene)
+t_vec	phong_light(t_scene	*scene, int id)
 {
 	t_vec	light_color;
 	t_vec	light_sum;
@@ -72,11 +71,10 @@ t_vec	phong_light(t_scene	*scene)
 	light_color = vec(0, 0, 0);
 	while (scene->lights)
 	{
-		light_color = vec_add(light_color, point_light_get(scene, scene->lights));
+		light_color = vec_add(light_color, point_light_get(scene, scene->lights, id));
 		scene->lights = scene->lights->next;
 	}
 	light_color = vec_add(light_color, scene->ambient.color);
-	// light_sum = vec_mul_vec(light_color, scene->rec.albedo);
-	light_sum = vec_mul_vec(light_color, vec(0, 0, 0.5));
+	light_sum = vec_mul_vec(light_color, scene->rec.albedo);
 	return (vec_min(light_sum, vec(1, 1, 1)));
 }
