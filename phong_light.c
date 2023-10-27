@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/24 14:44:35 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/27 19:54:06 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ t_vec	point_light_get(t_scene *scene, t_light *light)
 	t_ray	light_ray;
 	double	light_len;
 
-	light_dir = vec_unit(vec_sub(light->origin, scene->rec.p));
+	light_dir = vec_sub(light->origin, scene->rec.p);
 	light_len = vec_length(light_dir);
 	light_ray = ray(vec_add(scene->rec.p, vec_mul(scene->rec.normal, EPSILON)), light_dir);
 	if (in_shadow(scene, light_ray, light_len))
-		return (vec(0, 0, 0));
+		return (vec(0, 0, 0));	
+	light_dir = vec_unit(light_dir);
 	kd = fmax(vec_dot(scene->rec.normal, light_dir), 0.0);
 	diffuse = vec_mul(light->light_color, kd);
 	view_dir = vec_unit(vec_mul(scene->ray.dir, -1));

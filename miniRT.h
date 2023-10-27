@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/24 15:01:24 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/27 20:33:37 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,8 @@ t_vec	vec_min(t_vec v1, t_vec v2);
 t_scene set_scene(void);
 void print_scene(t_scene scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
+
+
+double	ft_strtod(char	*src);
 
 #endif

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "ios": "c",
-        "complex": "c"
+        "complex": "c",
+        "functional": "c"
     }
 }
