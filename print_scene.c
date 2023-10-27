@@ -54,18 +54,16 @@ int ray_color(t_ray ray, t_scene scene)
     color = vec(0, 0, 0);    // color값 초기화
     scene.rec.tmin = 0;
     scene.rec.tmax = INFINITY;
+    scene.ambient.color = vec_mul(scene.ambient.color, 0.1);   // define ka : 0.1
     obj_list = scene.objects;
     while (obj_list)
     {
+        is_hit = 0;
         if (obj_list->type == SPHERE)
             is_hit = hit_sphere(&(scene.rec), ray, obj_list->element);
-        // printf("%f %f %f\n", scene.rec.normal.x );
         if (is_hit == 1)
         {
-            color = phong_light(&scene, ray);
-            // printf("%f %f %f\n", color.x, color.y, color.z);
-            // color = vec(0.1,1,0);
-            scene.rec.tmax = scene.rec.t;
+            color = phong_light(&scene);
         }
         obj_list = obj_list->next;
     }
@@ -104,6 +102,7 @@ void print_scene(t_scene scene, t_data image)
                 vec(lower_left_corner.x + u * horizontal.x + v * vertical.x - ray.origin.x,
 			    lower_left_corner.y + u * horizontal.y + v * vertical.y - ray.origin.y,
 			    lower_left_corner.z + u * horizontal.z + v * vertical.z - ray.origin.z);
+            scene.ray = ray;
 			my_mlx(&image, i, j, ray_color(ray, scene));
         }
     }

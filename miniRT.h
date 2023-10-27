@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/24 17:50:47 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/24 15:01:24 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ int		hit(t_scene *scene, t_ray r, t_hit_record *rec);
 int		hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp);
 int		in_shadow(t_scene *scene, t_ray r, double light_len);
 t_vec	reflect(t_vec v, t_vec n);
-t_vec	point_light_get(t_scene *scene, t_light *light, t_ray r);
-t_vec	phong_light(t_scene	*scene, t_ray ray);
+t_vec	point_light_get(t_scene *scene, t_light *light);
+t_vec	phong_light(t_scene	*scene);
 
 // vec_operator1
 t_vec	vec(double x, double y, double z);

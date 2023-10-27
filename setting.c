@@ -44,9 +44,6 @@ void	set_lights(t_scene *scene, char **res)
 	t_light	*lights;
 	char **origin;
 	char **light_color;
-	t_light *iter;
-
-	iter = scene->lights;
 
 	lights = malloc(sizeof(t_light));
 	if (!lights)
@@ -55,16 +52,8 @@ void	set_lights(t_scene *scene, char **res)
 	light_color = ft_split(res[3], ',');
 	lights->origin = vec(ft_atoi(origin[0]), ft_atoi(origin[1]), ft_atoi(origin[2]));
 	lights->brightness = ft_atoi(res[2]);
-	lights->light_color = vec(ft_atoi(light_color[0]), ft_atoi(light_color[1]), ft_atoi(light_color[2]));;
+	lights->light_color = vec(ft_atoi(light_color[0]), ft_atoi(light_color[1]), ft_atoi(light_color[2]));
 	lights->next = NULL;
-	// if (!iter)
-	// 	iter = lights;
-	// else
-	// {
-	// 	while (iter->next != NULL)
-	// 		iter = iter->next;
-	// 	iter->next = lights;
-	// }
 	if (!scene->lights)
 		scene->lights = lights;
 	else
