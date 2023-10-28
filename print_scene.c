@@ -11,14 +11,14 @@ t_vec	set_face_normal(t_vec normal, t_ray ray)
 
 int hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
 {
+    t_vec   oc;
     double  a;
     double  b;
     double  c;
-    double	discriminant;
     double  sqrtd;
     double  root;
-    t_vec   oc;
     t_vec   normal;
+    double	discriminant;
 
     oc = vec_sub(ray.origin, sp->center);
     a = vec_dot(ray.dir, ray.dir);
@@ -45,6 +45,13 @@ int hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
 	return (1);
 }
 
+int rgb_to_color(t_vec color)
+{
+    return ((int)(255.999 * color.x) << 16
+        | (int)(255.999 * color.y) << 8
+            | (int)(255.999 * color.z));
+}
+
 int ray_color(t_ray ray, t_scene scene)
 {
     int             is_hit;
@@ -67,27 +74,43 @@ int ray_color(t_ray ray, t_scene scene)
         }
         obj_list = obj_list->next;
     }
-    return ((int)(255.999 * color.x) << 16 | (int)(255.999 * color.y) << 8 | (int)(255.999 * color.z));
+    return (rgb_to_color(color));
 }
 
-void print_scene(t_scene scene, t_data image)
+t_vec   get_lower_left_corner(t_scene scene, t_vec horizontal, t_vec vertical)
 {
-    t_ray   ray;
-    t_vec   vertical;
-    t_vec	horizontal;
     t_vec   lower_left_corner;
-    double  u;
-    double  v;
-    int     i;
-    int     j;
 
-    // lower_left_corner
-    vertical = vec(0, -scene.viewport.height, 0);
-    horizontal = vec(scene.viewport.width, 0, 0);
     lower_left_corner = 
         vec(scene.camera.origin.x + (- horizontal.x / 2) + (-vertical.x / 2) + (0),
         scene.camera.origin.y + (- horizontal.y / 2) + (- vertical.y / 2) + (0),
         scene.camera.origin.z + (- horizontal.z / 2) + (-vertical.z / 2) + (-scene.viewport.focal_length));
+    return (lower_left_corner);
+}
+
+t_vec   get_ray_dir(t_print p, t_ray ray)
+{
+    t_vec   dir;
+
+    dir = 
+        vec(p.lower_left_corner.x + p.u * p.horizontal.x + p.v * p.vertical.x - ray.origin.x,
+        p.lower_left_corner.y + p.u * p.horizontal.y + p.v * p.vertical.y - ray.origin.y,
+        p.lower_left_corner.z + p.u * p.horizontal.z + p.v * p.vertical.z - ray.origin.z);
+    return (dir);
+}
+
+void print_scene(t_scene scene, t_data image)
+{
+    int     i;
+    int     j;
+    t_ray   ray;
+    t_print print_vec;
+
+    // lower_left_corner
+    print_vec.vertical = vec(0, -scene.viewport.height, 0);
+    print_vec.horizontal = vec(scene.viewport.width, 0, 0);
+    print_vec.lower_left_corner
+        = get_lower_left_corner(scene, print_vec.horizontal, print_vec.vertical);
     // ray
     ray.origin = scene.camera.origin;   // 카메라에서 나오는 ray
     j = scene.size.height;
@@ -96,12 +119,9 @@ void print_scene(t_scene scene, t_data image)
         i = -1;
         while (++i < scene.size.width)
         {
-            u = (double)i / (scene.size.width - 1);
-			v = (double)j / (scene.size.height - 1);
-			ray.dir = 
-                vec(lower_left_corner.x + u * horizontal.x + v * vertical.x - ray.origin.x,
-			    lower_left_corner.y + u * horizontal.y + v * vertical.y - ray.origin.y,
-			    lower_left_corner.z + u * horizontal.z + v * vertical.z - ray.origin.z);
+            print_vec.u = (double)i / (scene.size.width - 1);
+			print_vec.v = (double)j / (scene.size.height - 1);
+            ray.dir = get_ray_dir(print_vec, ray);
             scene.ray = ray;
 			my_mlx(&image, i, j, ray_color(ray, scene));
         }
