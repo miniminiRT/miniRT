@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:10:01 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/28 15:09:02 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:08:44 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-// int	is_same_obj(t_object *obj1, t_object *obj2)
-// {
-// 	if (obj1->type == SPHERE)
-// 	{
-// 		obj1->
-// 	}
-// }
 
 int	hit(t_scene *scene, t_ray r, t_hit_record *rec, int id)
 {

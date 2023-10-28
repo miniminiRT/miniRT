@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/28 15:38:46 by seojchoi         ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2023/10/28 16:11:31 by seojchoi         ###   ########.fr       */
+=======
+/*   Updated: 2023/10/28 16:22:00 by jonhan           ###   ########.fr       */
+>>>>>>> upstream/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +35,7 @@ typedef struct s_vec{
 	double	x;
 	double	y;
 	double	z;
-
 }	t_vec;
-
 
 typedef struct s_viewport{
 	int		width;
@@ -109,6 +111,14 @@ enum	e_side{
 	OUT
 };
 
+typedef struct s_print{
+	t_vec   vertical;
+    t_vec	horizontal;
+    t_vec   lower_left_corner;
+    double  u;
+    double  v;
+}	t_print;
+
 typedef struct s_hit_record{
 	t_vec		p; //object와 ray의 교점;
 	t_vec		normal; //법선벡터
@@ -129,6 +139,22 @@ typedef struct s_scene{
 	t_ambient	ambient;
 	t_hit_record	rec;
 }	t_scene;
+
+typedef struct	s_phong{
+	t_vec	diffuse;
+	t_vec	light_dir;
+	double	kd;
+	t_vec	specular;
+	t_vec	view_dir;
+	t_vec	reflect_dir;
+	double	spec;
+	double	ksn;
+	double	ks;
+	double	brightness;
+	t_vec	light_sum;
+	t_ray	light_ray;
+	double	light_len;
+}	t_phong;
 
 t_vec	vec(double x, double y, double z);
 t_vec	vec_add(t_vec v1, t_vec v2);
