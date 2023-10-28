@@ -2,6 +2,10 @@
     "files.associations": {
         "ios": "c",
         "complex": "c",
+<<<<<<< HEAD
         "minirt": "c"
+=======
+        "functional": "c"
+>>>>>>> upstream/main
     }
 }

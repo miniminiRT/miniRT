@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/24 15:01:24 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/28 15:38:46 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ typedef struct s_size
 typedef struct s_camera{
 	t_vec	origin;
 	t_vec	dir;
-	double	degree;
+	double	fov;
 }	t_camera;
 
 typedef struct s_object{
+	int				id;
 	enum e_type		type;
 	void			*element;
 	struct s_object	*next;
@@ -142,12 +143,12 @@ t_vec	vec_unit(t_vec v);
 
 t_vec	vec_mul_vec(t_vec v1, t_vec v2);
 t_ray	ray(t_vec origin, t_vec dir);
-int		hit(t_scene *scene, t_ray r, t_hit_record *rec);
+int		hit(t_scene *scene, t_ray r, t_hit_record *rec, int id);
 int		hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp);
-int		in_shadow(t_scene *scene, t_ray r, double light_len);
+int	in_shadow(t_scene *scene, t_ray r, double light_len, int id);
 t_vec	reflect(t_vec v, t_vec n);
-t_vec	point_light_get(t_scene *scene, t_light *light);
-t_vec	phong_light(t_scene	*scene);
+t_vec	point_light_get(t_scene *scene, t_light *light, int id);
+t_vec	phong_light(t_scene	*scene, int id);
 
 // vec_operator1
 t_vec	vec(double x, double y, double z);
@@ -171,5 +172,8 @@ t_vec	vec_min(t_vec v1, t_vec v2);
 t_scene set_scene(void);
 void print_scene(t_scene scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
+
+
+double	ft_strtod(char	*src);
 
 #endif
