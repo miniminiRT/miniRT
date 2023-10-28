@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/27 21:37:45 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:06:20 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 #define LUMEN 3
-#define ka 0.1
+#define KA 0.1
 #define EPSILON 1e-6
 
 t_vec	reflect(t_vec v, t_vec n)
@@ -27,8 +27,7 @@ t_vec	reflect(t_vec v, t_vec n)
 	return (result);
 }
 
-t_vec	point_light_get(t_scene *scene, t_light *light, int id)
-{
+typedef struct	s_phong{
 	t_vec	diffuse;
 	t_vec	light_dir;
 	double	kd;
@@ -42,24 +41,30 @@ t_vec	point_light_get(t_scene *scene, t_light *light, int id)
 	t_vec	light_sum;
 	t_ray	light_ray;
 	double	light_len;
+}	t_phong;
 
-	light_dir = vec_sub(light->origin, scene->rec.p);
-	light_len = vec_length(light_dir);
-	light_ray = ray(vec_add(scene->rec.p, vec_mul(scene->rec.normal, EPSILON)), light_dir);
-	if (in_shadow(scene, light_ray, light_len, id))
-		return (vec(0, 0, 0));	
-	light_dir = vec_unit(light_dir);
-	kd = fmax(vec_dot(scene->rec.normal, light_dir), 0.0);
-	diffuse = vec_mul(light->light_color, kd);
-	view_dir = vec_unit(vec_mul(scene->ray.dir, -1));
-	reflect_dir = reflect(vec_mul(light_dir, -1), scene->rec.normal);
-	ksn = 64;
-	ks = 0.5;
-	spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), ksn);
-	specular = vec_mul(vec_mul(light->light_color, ks), spec);
-	brightness = light->brightness * LUMEN;
-	light_sum = vec_add(diffuse, specular);
-	return (vec_mul(light_sum, brightness));
+t_vec	point_light_get(t_scene *scene, t_light *light, int id)
+{
+	t_phong	arg;
+
+	arg.light_dir = vec_sub(light->origin, scene->rec.p);
+	arg.light_len = vec_length(arg.light_dir);
+	arg.light_ray = ray(vec_add(scene->rec.p, \
+		vec_mul(scene->rec.normal, EPSILON)), arg.light_dir);
+	if (in_shadow(scene, arg.light_ray, arg.light_len, id))
+		return (vec(0, 0, 0));
+	arg.light_dir = vec_unit(arg.light_dir);
+	arg.kd = fmax(vec_dot(scene->rec.normal, arg.light_dir), 0.0);
+	arg.diffuse = vec_mul(light->light_color, arg.kd);
+	arg.view_dir = vec_unit(vec_mul(scene->ray.dir, -1));
+	arg.reflect_dir = reflect(vec_mul(arg.light_dir, -1), scene->rec.normal);
+	arg.ksn = 64;
+	arg.ks = 0.5;
+	arg.spec = pow(fmax(vec_dot(arg.view_dir, arg.reflect_dir), 0.0), arg.ksn);
+	arg.specular = vec_mul(vec_mul(light->light_color, arg.ks), arg.spec);
+	arg.brightness = light->brightness * LUMEN;
+	arg.light_sum = vec_add(arg.diffuse, arg.specular);
+	return (vec_mul(arg.light_sum, arg.brightness));
 }
 
 
@@ -71,7 +76,8 @@ t_vec	phong_light(t_scene	*scene, int id)
 	light_color = vec(0, 0, 0);
 	while (scene->lights)
 	{
-		light_color = vec_add(light_color, point_light_get(scene, scene->lights, id));
+		light_color = \
+			vec_add(light_color, point_light_get(scene, scene->lights, id));
 		scene->lights = scene->lights->next;
 	}
 	light_color = vec_add(light_color, scene->ambient.color);
