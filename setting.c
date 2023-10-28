@@ -90,6 +90,7 @@ void	set_sphere(t_scene *scene, char **res, int *id)
 		object->id = *id;
 		object->type = SPHERE;
 		object->element = (void *)sphere;
+		object->hit_object_func = hit_sphere;
 		object->next = NULL;
 		scene->objects = object;
 	}
@@ -103,6 +104,7 @@ void	set_sphere(t_scene *scene, char **res, int *id)
 		object->id = *id;
 		object->type = SPHERE;
 		object->element = (void *)sphere;
+		object->hit_object_func = hit_sphere;
 		object->next = NULL;
 		tmp->next = object;
 	}

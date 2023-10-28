@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/28 15:38:46 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/10/28 16:22:00 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_object{
 	enum e_type		type;
 	void			*element;
 	struct s_object	*next;
+	int				(*hit_object_func)(rec, ray, struct s_object);
 	// t_vec	albedo;
 }	t_object;
 
