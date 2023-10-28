@@ -9,9 +9,12 @@ void set_size(t_scene *scene)
 
 void set_viewport(t_scene *scene)
 {
-    scene->viewport.height = 2.0;
-    scene->viewport.width = scene->size.aspect_ratio * scene->viewport.height;
+
+    double theta = (scene->camera.fov * M_PI) / 180.0;
+    double h = tan(theta/2);
     scene->viewport.focal_length = 1.0;
+    scene->viewport.height = 2.0 * h * scene->viewport.focal_length;
+    scene->viewport.width = scene->size.aspect_ratio * scene->viewport.height;
 }
 
 void set_camera(t_scene *scene, char **res)
@@ -23,7 +26,7 @@ void set_camera(t_scene *scene, char **res)
     scene->camera.origin = vec(ft_strtod(origin[0]), ft_strtod(origin[1]), ft_strtod(origin[2]));
     dir = ft_split(res[2], ',');
 	scene->camera.dir =  vec(ft_strtod(dir[0]), ft_strtod(dir[1]), ft_strtod(dir[2]));
-	scene->camera.degree = ft_strtod(res[3]);
+	scene->camera.fov = ft_strtod(res[3]);
 	//free dir, origin
 }
 
@@ -92,15 +95,16 @@ void	set_sphere(t_scene *scene, char **res, int *id)
 	}
 	else
 	{
-		while (scene->objects->next != NULL)
-			scene->objects = scene->objects->next;
+		t_object *tmp = scene->objects;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
 		object = malloc(sizeof(t_object));
 		//
 		object->id = *id;
 		object->type = SPHERE;
 		object->element = (void *)sphere;
 		object->next = NULL;
-		scene->objects->next = object;
+		tmp->next = object;
 	}
 	//프리 많이 해야댐
 }

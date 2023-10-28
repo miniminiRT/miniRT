@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:10:01 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/27 21:53:42 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:09:02 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	hit(t_scene *scene, t_ray r, t_hit_record *rec, int id)
 	hit_anything = 0;
 	while (scene->objects)
 	{
-			printf("%d, %d\n", scene->objects->id, id);
 		if (scene->objects->id != id)
 		{
 			if (hit_sphere(rec, r, scene->objects->element))

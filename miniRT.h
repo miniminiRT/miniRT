@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/27 21:38:59 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:38:46 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_size
 typedef struct s_camera{
 	t_vec	origin;
 	t_vec	dir;
-	double	degree;
+	double	fov;
 }	t_camera;
 
 typedef struct s_object{

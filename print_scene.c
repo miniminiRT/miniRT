@@ -51,7 +51,7 @@ int ray_color(t_ray ray, t_scene scene)
     t_vec           color;
     t_object        *obj_list;
 
-    color = vec(1, 1, 1);    // color값 초기화
+    color = vec(0, 0, 0);    // color값 초기화
     scene.rec.tmin = 0;
     scene.rec.tmax = INFINITY;
     scene.ambient.color = vec_mul(scene.ambient.color, 0.1);   // define ka : 0.1
