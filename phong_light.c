@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/28 16:06:20 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/28 16:33:42 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,6 @@ t_vec	reflect(t_vec v, t_vec n)
 	// 공식이 왜 이렇게 되는지 이해 안됨.
 	return (result);
 }
-
-typedef struct	s_phong{
-	t_vec	diffuse;
-	t_vec	light_dir;
-	double	kd;
-	t_vec	specular;
-	t_vec	view_dir;
-	t_vec	reflect_dir;
-	double	spec;
-	double	ksn;
-	double	ks;
-	double	brightness;
-	t_vec	light_sum;
-	t_ray	light_ray;
-	double	light_len;
-}	t_phong;
 
 t_vec	point_light_get(t_scene *scene, t_light *light, int id)
 {

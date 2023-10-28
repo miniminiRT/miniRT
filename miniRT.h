@@ -62,7 +62,6 @@ typedef struct s_object{
 	enum e_type		type;
 	void			*element;
 	struct s_object	*next;
-	int				(*hit_object_func)(rec, ray, struct s_object);
 	// t_vec	albedo;
 }	t_object;
 
@@ -140,6 +139,22 @@ typedef struct s_scene{
 	t_ambient	ambient;
 	t_hit_record	rec;
 }	t_scene;
+
+typedef struct	s_phong{
+	t_vec	diffuse;
+	t_vec	light_dir;
+	double	kd;
+	t_vec	specular;
+	t_vec	view_dir;
+	t_vec	reflect_dir;
+	double	spec;
+	double	ksn;
+	double	ks;
+	double	brightness;
+	t_vec	light_sum;
+	t_ray	light_ray;
+	double	light_len;
+}	t_phong;
 
 t_vec	vec(double x, double y, double z);
 t_vec	vec_add(t_vec v1, t_vec v2);
