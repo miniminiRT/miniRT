@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/28 16:22:00 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/10/28 17:04:50 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_vec{
 typedef struct s_viewport{
 	int		width;
 	int		height;
-	double	focal_length;	
+	double	focal_length;
 	// double	aspect_ratio;
 }	t_viewport;
 
@@ -60,7 +60,6 @@ typedef struct s_object{
 	enum e_type		type;
 	void			*element;
 	struct s_object	*next;
-	int				(*hit_object_func)(rec, ray, struct s_object);
 	// t_vec	albedo;
 }	t_object;
 
