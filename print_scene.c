@@ -44,13 +44,6 @@ int hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
 			return (0);
 	}
     set_rec(rec, sp, ray, root);
-	// rec->albedo = sp->albedo;
-	// rec->t = root;
-    // rec->tmax = rec->t;
-	// rec->p = ray_at(ray, rec->t);
-	// // 법선 벡터의 방향을 계산해서 써줘야 함.
-	// normal = vec_div((vec_sub(rec->p, sp->center)), sp->radius);
-	// rec->normal = set_face_normal(normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
 	return (1);
 }
 
@@ -86,14 +79,18 @@ int ray_color(t_ray ray, t_scene scene)
     return (rgb_to_color(color));
 }
 
-t_vec   get_lower_left_corner(t_scene scene, t_vec horizontal, t_vec vertical)
+t_vec   get_lower_left_corner(t_scene scene, t_vec horizontal, t_vec vertical, t_vec w)
 {
     t_vec   lower_left_corner;
 
+    // lower_left_corner = 
+    //     vec(scene.camera.origin.x + (- horizontal.x / 2) + (-vertical.x / 2) + (0),
+    //     scene.camera.origin.y + (- horizontal.y / 2) + (- vertical.y / 2) + (0),
+    //     scene.camera.origin.z + (- horizontal.z / 2) + (-vertical.z / 2) + (-scene.viewport.focal_length));
     lower_left_corner = 
-        vec(scene.camera.origin.x + (- horizontal.x / 2) + (-vertical.x / 2) + (0),
-        scene.camera.origin.y + (- horizontal.y / 2) + (- vertical.y / 2) + (0),
-        scene.camera.origin.z + (- horizontal.z / 2) + (-vertical.z / 2) + (-scene.viewport.focal_length));
+        vec(scene.camera.origin.x + (- horizontal.x / 2) + (-vertical.x / 2) - (scene.viewport.focal_length * w.x),
+        scene.camera.origin.y + (- horizontal.y / 2) + (- vertical.y / 2) - (scene.viewport.focal_length * w.y),
+        scene.camera.origin.z + (- horizontal.z / 2) + (-vertical.z / 2) - (scene.viewport.focal_length * w.z));
     return (lower_left_corner);
 }
 
@@ -115,11 +112,21 @@ void print_scene(t_scene scene, t_data image)
     t_ray   ray;
     t_print print_vec;
 
+    // camera view 추가
+    t_vec   lookfrom = scene.camera.origin;
+    // t_vec   lookat = vec_unit(vec_add(lookfrom, scene.camera.dir));
+    t_vec   lookat = vec_add(lookfrom, vec_unit(scene.camera.dir));
+    t_vec   vup = vec(0, 1, 0);
+    scene.viewport.focal_length = vec_length(vec_sub(lookfrom, lookat));
+    t_vec   w = vec_unit(vec_sub(lookfrom, lookat));  // 시선 방향 벡터
+    t_vec   u = vec_unit(vec_cross(vup, w));  // 카메라 좌우 방향 벡터
+    t_vec   v = vec_cross(w, u);  // 카메라 상하 방향 벡터
+
     // lower_left_corner
-    print_vec.vertical = vec(0, -scene.viewport.height, 0);
-    print_vec.horizontal = vec(scene.viewport.width, 0, 0);
+    print_vec.vertical = vec_mul(v, -scene.viewport.height);
+    print_vec.horizontal = vec_mul(u, scene.viewport.width);
     print_vec.lower_left_corner
-        = get_lower_left_corner(scene, print_vec.horizontal, print_vec.vertical);
+        = get_lower_left_corner(scene, print_vec.horizontal, print_vec.vertical, w);
     // ray
     ray.origin = scene.camera.origin;   // 카메라에서 나오는 ray
     j = scene.size.height;
