@@ -1,18 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 14:26:18 by jonhan            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/10/28 16:11:31 by seojchoi         ###   ########.fr       */
-=======
-/*   Updated: 2023/10/28 16:22:00 by jonhan           ###   ########.fr       */
->>>>>>> upstream/main
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -105,6 +90,14 @@ typedef struct s_ray{
 	t_vec	dir;
 	double	t;
 }	t_ray;
+
+typedef struct s_util{
+	t_vec   oc;
+	double  a;
+    double  b;
+    double  c;
+	double  sqrtd;
+}	t_util;
 
 enum	e_side{
 	IN,

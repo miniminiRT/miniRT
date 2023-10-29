@@ -9,39 +9,48 @@ t_vec	set_face_normal(t_vec normal, t_ray ray)
 	return (normal);  // 카메라가 구의 바깥에 있으면 그대로 리턴하기
 }
 
-int hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
+void    set_rec(t_hit_record *rec, t_sphere *sp, t_ray ray, double root)
 {
-    t_vec   oc;
-    double  a;
-    double  b;
-    double  c;
-    double  sqrtd;
-    double  root;
     t_vec   normal;
-    double	discriminant;
 
-    oc = vec_sub(ray.origin, sp->center);
-    a = vec_dot(ray.dir, ray.dir);
-    b = 2.0 * vec_dot(oc, ray.dir);
-    c = vec_dot(oc, oc) - (sp->radius * sp->radius);
-    discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)  // 판별식이 음수이면 해가 없음.
-		return (0);
-    sqrtd = sqrt(discriminant);
-    root = (-b - sqrtd) / (2 * a);
-	if (root < rec->tmin || root > rec->tmax)
-	{
-		root = (-b + sqrtd) / (2 * a);
-		if (root < rec->tmin || root > rec->tmax)
-			return (0);
-	}
-	rec->albedo = sp->albedo;
+    rec->albedo = sp->albedo;
 	rec->t = root;
     rec->tmax = rec->t;
 	rec->p = ray_at(ray, rec->t);
 	// 법선 벡터의 방향을 계산해서 써줘야 함.
 	normal = vec_div((vec_sub(rec->p, sp->center)), sp->radius);
 	rec->normal = set_face_normal(normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
+}
+
+int hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
+{
+    double  root;
+    double  discriminant;
+    t_util  util;
+
+    util.oc = vec_sub(ray.origin, sp->center);
+    util.a = vec_dot(ray.dir, ray.dir);
+    util.b = 2.0 * vec_dot(util.oc, ray.dir);
+    util.c = vec_dot(util.oc, util.oc) - (sp->radius * sp->radius);
+    discriminant = (util.b * util.b) - 4 * (util.a * util.c);
+	if (discriminant < 0)  // 판별식이 음수이면 해가 없음.
+		return (0);
+    util.sqrtd = sqrt(discriminant);
+    root = (-util.b - util.sqrtd) / (2 * util.a);
+	if (root < rec->tmin || root > rec->tmax)
+	{
+		root = (-util.b + util.sqrtd) / (2 * util.a);
+		if (root < rec->tmin || root > rec->tmax)
+			return (0);
+	}
+    set_rec(rec, sp, ray, root);
+	// rec->albedo = sp->albedo;
+	// rec->t = root;
+    // rec->tmax = rec->t;
+	// rec->p = ray_at(ray, rec->t);
+	// // 법선 벡터의 방향을 계산해서 써줘야 함.
+	// normal = vec_div((vec_sub(rec->p, sp->center)), sp->radius);
+	// rec->normal = set_face_normal(normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
 	return (1);
 }
 
