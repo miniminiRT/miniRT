@@ -19,7 +19,8 @@ MLX_DIR 	= minilibx
 MLX			= libmlx.a
 HEADER		= miniRT.h
 OPTION 		= -L./ -lmlx -framework OpenGL -framework AppKit
-LIBFT 		= ./libft/libft.a
+LIBFT_DIR	= libft
+LIBFT 		= libft.a
 NAME		= miniRT
 CC			= cc
 RM 			= rm -rf
@@ -27,11 +28,11 @@ CFLAGS		= -Wall -Wextra -Werror
 
 all:		$(NAME)
 
-$(NAME):  $(OBJ) $(HEADER) $(MLX)
+$(NAME):  $(OBJ) $(HEADER) $(MLX) $(LIBFT)
 		cp ./$(MLX_DIR)/$(MLX) $(MLX)
+		cp ./$(LIBFT_DIR)/$(LIBFT) $(LIBFT)
 		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) -I$(HEADER)
 		@echo $(GREEN)"miniRT made." $(EOC)
-# @$(CC) $(OBJ) -o $(NAME)
 
 %.o: 		%.c
 		@$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
@@ -39,10 +40,15 @@ $(NAME):  $(OBJ) $(HEADER) $(MLX)
 $(MLX):
 	make -C $(MLX_DIR)
 
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
 clean:
 		@$(RM) $(OBJ)
 		$(RM) $(MLX)
+		$(RM) $(LIBFT)
 		make clean -C $(MLX_DIR)
+		make fclean -C $(LIBFT_DIR)
 		@echo $(GREEN)"cleaned." $(EOC)
 
 fclean:		clean
