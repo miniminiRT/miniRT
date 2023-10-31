@@ -70,6 +70,8 @@ int ray_color(t_ray ray, t_scene scene)
         is_hit = 0;
         if (obj_list->type == SPHERE)
             is_hit = hit_sphere(&(scene.rec), ray, obj_list->element);
+        else if (obj_list->type == PLANE)
+            is_hit = hit_plane(&(scene.rec), ray, obj_list->element);
         if (is_hit == 1)
         {
             color = phong_light(&scene, obj_list->id);
@@ -83,10 +85,6 @@ t_vec   get_lower_left_corner(t_scene scene, t_vec horizontal, t_vec vertical, t
 {
     t_vec   lower_left_corner;
 
-    // lower_left_corner = 
-    //     vec(scene.camera.origin.x + (- horizontal.x / 2) + (-vertical.x / 2) + (0),
-    //     scene.camera.origin.y + (- horizontal.y / 2) + (- vertical.y / 2) + (0),
-    //     scene.camera.origin.z + (- horizontal.z / 2) + (-vertical.z / 2) + (-scene.viewport.focal_length));
     lower_left_corner = 
         vec(scene.camera.origin.x + (- horizontal.x / 2) + (-vertical.x / 2) - (scene.viewport.focal_length * w.x),
         scene.camera.origin.y + (- horizontal.y / 2) + (- vertical.y / 2) - (scene.viewport.focal_length * w.y),

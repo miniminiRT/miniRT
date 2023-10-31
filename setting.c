@@ -137,15 +137,16 @@ void	set_plane(t_scene *scene, char **res, int *id)
 	}
 	else
 	{
-		while (scene->objects->next != NULL)
-			scene->objects = scene->objects->next;
+		t_object *tmp = scene->objects;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
 		object = malloc(sizeof(t_object));
 		//
 		object->id = *id;
 		object->type = PLANE;
 		object->element = (void *)plane;
 		object->next = NULL;
-		scene->objects->next = object;
+		tmp->next = object;
 	}
 	//프리 많이 해야댐
 }
@@ -179,15 +180,16 @@ void	set_cylinder(t_scene *scene, char **res, int *id)
 	}
 	else
 	{
-		while (scene->objects->next != NULL)
-			scene->objects = scene->objects->next;
+		t_object *tmp = scene->objects;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
 		object = malloc(sizeof(t_object));
 		//
 		object->id = *id;
 		object->type = CYLINDER;
-		object->element = (void *)cylinder;
+		object->element = (void *) cylinder;
 		object->next = NULL;
-		scene->objects->next = object;
+		tmp->next = object;
 	}
 	//프리 많이 해야댐
 }
