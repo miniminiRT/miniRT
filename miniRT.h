@@ -166,7 +166,7 @@ int		hit(t_scene *scene, t_ray r, t_hit_record *rec, int id);
 int		hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp);
 int	in_shadow(t_scene *scene, t_ray r, double light_len, int id);
 t_vec	reflect(t_vec v, t_vec n);
-t_vec	point_light_get(t_scene *scene, t_light *light, int id);
+t_vec	point_light_get(t_scene *scene, t_light *light, int id, int *is_shadow);
 t_vec	phong_light(t_scene	*scene, int id);
 
 // vec_operator1

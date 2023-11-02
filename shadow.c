@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:10:01 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/28 16:08:44 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/02 16:22:28 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,20 @@ int	hit(t_scene *scene, t_ray r, t_hit_record *rec, int id)
 
 	tmp_rec = *rec;
 	hit_anything = 0;
-	while (scene->objects)
+	t_object *iter = scene->objects;
+	while (iter)
 	{
-		if (scene->objects->id != id)
+		if (iter->id != id)
 		{
-			if (hit_sphere(rec, r, scene->objects->element))
+			if (hit_sphere(rec, r, iter->element))
 			{
 				hit_anything = 1;
 				tmp_rec.tmax = tmp_rec.t;
 				*rec = tmp_rec;
 			}
+			// 평면 추가하기
 		}
-		scene->objects = scene->objects->next;
+		iter = iter->next;
 	}
 	return (hit_anything);
 }

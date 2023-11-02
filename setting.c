@@ -62,11 +62,21 @@ void	set_lights(t_scene *scene, char **res)
 		scene->lights = lights;
 	else
 	{
-		while (scene->lights->next != NULL)
-			scene->lights = scene->lights->next;
-		scene->lights->next = lights;
+		t_light *tmp = scene->lights;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = lights;
 	}
 	//free 만히 해줘야댐
+
+	// t_light	*iter;
+
+	// iter = scene->lights;
+	// while (iter)
+	// {
+	// 	printf("%f\n", iter->brightness);
+	// 	iter = iter->next;
+	// }
 }
 
 void	set_sphere(t_scene *scene, char **res, int *id)

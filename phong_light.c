@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/28 16:33:42 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:22:54 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vec	reflect(t_vec v, t_vec n)
 	return (result);
 }
 
-t_vec	point_light_get(t_scene *scene, t_light *light, int id)
+t_vec	point_light_get(t_scene *scene, t_light *light, int id, int *is_shadow)
 {
 	t_phong	arg;
 
@@ -36,7 +36,10 @@ t_vec	point_light_get(t_scene *scene, t_light *light, int id)
 	arg.light_ray = ray(vec_add(scene->rec.p, \
 		vec_mul(scene->rec.normal, EPSILON)), arg.light_dir);
 	if (in_shadow(scene, arg.light_ray, arg.light_len, id))
+	{
+		*is_shadow = 1;
 		return (vec(0, 0, 0));
+	}
 	arg.light_dir = vec_unit(arg.light_dir);
 	arg.kd = fmax(vec_dot(scene->rec.normal, arg.light_dir), 0.0);
 	arg.diffuse = vec_mul(light->light_color, arg.kd);
@@ -56,13 +59,22 @@ t_vec	phong_light(t_scene	*scene, int id)
 {
 	t_vec	light_color;
 	t_vec	light_sum;
+	t_light	*tmp;
+	int		is_shadow;
 
 	light_color = vec(0, 0, 0);
-	while (scene->lights)
+	is_shadow = 0;
+	tmp = scene->lights;
+	while (tmp)
 	{
 		light_color = \
-			vec_add(light_color, point_light_get(scene, scene->lights, id));
-		scene->lights = scene->lights->next;
+			vec_add(light_color, point_light_get(scene, tmp, id, &is_shadow));
+		if (is_shadow == 1)
+		{
+			light_color = vec(0, 0, 0);
+			break ;
+		}
+		tmp = tmp->next;
 	}
 	light_color = vec_add(light_color, scene->ambient.color);
 	light_sum = vec_mul_vec(light_color, scene->rec.albedo);
