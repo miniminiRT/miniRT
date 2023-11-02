@@ -195,5 +195,6 @@ void	my_mlx(t_data *data, int x, int y, int color);
 
 double	ft_strtod(char	*src);
 int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
+int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
 
 #endif

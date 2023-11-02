@@ -72,6 +72,8 @@ int ray_color(t_ray ray, t_scene scene)
             is_hit = hit_sphere(&(scene.rec), ray, obj_list->element);
         else if (obj_list->type == PLANE)
             is_hit = hit_plane(&(scene.rec), ray, obj_list->element);
+         else if (obj_list->type == CYLINDER)
+            is_hit = hit_cylinder(&(scene.rec), ray, obj_list->element);
         if (is_hit == 1)
         {
             color = phong_light(&scene, obj_list->id);
