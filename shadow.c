@@ -44,6 +44,7 @@ int	in_shadow(t_scene *scene, t_ray r, double light_len, int id)
 	rec.tmin = 0;
 	rec.tmax = light_len;
 	if (hit(scene, r, &rec, id))
-		return (1);
+		// return (1);
+		return (0);
 	return (0);
 }
