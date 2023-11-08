@@ -82,7 +82,7 @@ int	is_top(t_hit_record *rec, t_ray ray, t_cylinder *cy, t_vec center)
 			//
 			// ray.origin + t * ray.dir - cy.center의 크기가 0보다 크고 r보다 작으면 그려주기
 			s = vec_length(vec_sub(vec_add(ray.origin, vec_mul(ray.dir, t)), center));
-			if (!(s > 0.0 && s <= cy->radius))
+			if (!(s >= 0.0 && s <= cy->radius))
 				return (0);
 			//
 			rec->tmax = t;
@@ -123,7 +123,8 @@ int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy)
 	min = ray_at(down, cy->height / 2);
 
 	//  판별식에 사용할 a, b, c 구하기
-	h = vec_div(vec_sub(max, min), cy->height);
+	h = vec_div(vec_sub(max, min), vec_length(vec_sub(max, min)));
+	// h = vec_unit(cy->normal);
 	a = vec_dot(ray.dir, ray.dir) - vec_dot(ray.dir, h) * vec_dot(ray.dir, h);
 
 	w = vec_sub(ray.origin, min);
@@ -147,17 +148,17 @@ int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy)
 
 	// 해가 있다면 기둥인지, 바닥인지 확인하고 높이 만큼만 그려주기
 	size = vec_dot(vec_sub(ray_at(ray, root), min), h);
-	if (size < 0)
+	if (size < 0.0)
 		return (is_base(rec, ray, cy, min));
-	if (size > cy->height)
+	if (size > vec_length(vec_sub(max, min)))
 		return (is_top(rec, ray, cy, max));
-	if (size >= 0 && size <= cy->height)
+	if (size >= 0 && size <= vec_length(vec_sub(max, min)))
 	{
 		rec->tmax = root;
 		rec->t = root;
 		rec->p = ray_at(ray, rec->t);
 		rec->albedo = cy->color;
-		rec->normal = cy->normal;
+
 		t_vec  normal;
 		t_vec c;
 	
@@ -168,8 +169,10 @@ int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy)
 		n.t = size;
 		c = ray_at(n, size);
 
-		normal = vec_div((vec_sub(rec->p, c)), cy->radius);
-		rec->normal = set_face_normal(normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
+		// normal = vec_div((vec_sub(rec->p, c)), vec_length(vec_sub(rec->p, c)));
+		normal = vec_unit(vec_sub(rec->p, c));
+		rec->normal = normal;
+		// rec->normal = set_face_normal(normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
 		return (1);
 	}
 	return (0);
