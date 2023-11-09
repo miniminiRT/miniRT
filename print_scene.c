@@ -19,6 +19,7 @@ void    set_rec(t_hit_record *rec, t_sphere *sp, t_ray ray, double root)
 	rec->p = ray_at(ray, rec->t);
 	// 법선 벡터의 방향을 계산해서 써줘야 함.
 	normal = vec_div((vec_sub(rec->p, sp->center)), sp->radius);
+    // normal = vec_unit(vec_sub(rec->p, sp->center));
 	rec->normal = set_face_normal(normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
 }
 
