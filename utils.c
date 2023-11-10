@@ -16,6 +16,16 @@ int	is_valid(char **str, char *src)
 {
 	if (src[0] == '.')
 		return (0);
+	if (str[0] && ft_atoi(str[0]) == 0)
+	{
+		if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), "0", ft_strlen(str[0])))
+		{
+			if (!str[1])
+				return (1);
+			if (str[1] && !ft_strncmp(ft_itoa((ft_atoi(str[1]))), str[1], ft_strlen(str[1])))
+				return (1);
+		}
+	}
 	if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), str[0], ft_strlen(str[0])))
 	{
 		if (!str[1])

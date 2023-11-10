@@ -159,19 +159,7 @@ int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy)
 		rec->p = ray_at(ray, rec->t);
 		rec->albedo = cy->color;
 
-		// t_vec  normal;
-		t_vec c;
-	
-		t_ray	n;
-
-		n.dir = cy->normal;
-		n.origin = min;
-		n.t = size;
-		c = ray_at(n, size);
-
-		// normal = vec_div((vec_sub(rec->p, c)), vec_length(vec_sub(rec->p, c)));
-		// normal = vec_unit(vec_sub(rec->p, c));
-		t_vec cp = vec_sub(rec->p, c);
+		t_vec cp = vec_sub(rec->p, min);
 		t_vec qp = vec_sub(cp, vec_mul(cy->normal, vec_dot(cp, cy->normal)));
 		rec->normal = vec_unit(qp);
 		// rec->normal = set_face_normal(rec->normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기

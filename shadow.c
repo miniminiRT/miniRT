@@ -31,6 +31,13 @@ int	hit(t_scene *scene, t_ray r, t_hit_record *rec, int id)
 				*rec = tmp_rec;
 			}
 			// 평면 추가하기
+			// 원기둥 추가하기
+			if (hit_cylinder(rec, r, iter->element))
+			{
+				hit_anything = 1;
+				tmp_rec.tmax = tmp_rec.t;
+				*rec = tmp_rec;
+			}
 		}
 		iter = iter->next;
 	}
@@ -44,7 +51,7 @@ int	in_shadow(t_scene *scene, t_ray r, double light_len, int id)
 	rec.tmin = 0;
 	rec.tmax = light_len;
 	if (hit(scene, r, &rec, id))
-		// return (1);
+		return (1);
 		return (0);
 	return (0);
 }
