@@ -1,6 +1,6 @@
 #include "../miniRT.h"
 
-void    set_rec(t_hit_record *rec, t_sphere *sp, t_ray ray, double root)
+void    set_sphere_rec(t_hit_record *rec, t_sphere *sp, t_ray ray, double root)
 {
     t_vec   normal;
 
@@ -15,25 +15,14 @@ void    set_rec(t_hit_record *rec, t_sphere *sp, t_ray ray, double root)
 
 int hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
 {
-    double  root;
-    double  discriminant;
     t_util  util;
 
     util.oc = vec_sub(ray.origin, sp->center);
     util.a = vec_dot(ray.dir, ray.dir);
     util.b = 2.0 * vec_dot(util.oc, ray.dir);
     util.c = vec_dot(util.oc, util.oc) - (sp->radius * sp->radius);
-    discriminant = (util.b * util.b) - 4 * (util.a * util.c);
-	if (discriminant < 0)
-		return (0);
-    util.sqrtd = sqrt(discriminant);
-    root = (-util.b - util.sqrtd) / (2 * util.a);
-	if (root < rec->tmin || root > rec->tmax)
-	{
-		root = (-util.b + util.sqrtd) / (2 * util.a);
-		if (root < rec->tmin || root > rec->tmax)
-			return (0);
-	}
-    set_rec(rec, sp, ray, root);
+    if (get_root(&util, rec) == 0)
+        return (0);
+    set_sphere_rec(rec, sp, ray, util.root);
 	return (1);
 }

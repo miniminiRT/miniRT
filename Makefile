@@ -23,6 +23,7 @@ SRC			=	main.c \
 				./hit_object/plane.c \
 				./hit_object/sphere.c \
 				./hit_object/cylinder.c \
+				./hit_object/utils.c \
 				./operator/vec_operator1.c \
 				./operator/vec_operator2.c \
 				./operator/vec_operator3.c

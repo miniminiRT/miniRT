@@ -59,73 +59,60 @@ int	is_top(t_hit_record *rec, t_ray ray, t_cylinder *cy, t_vec center)
 	return (0);
 }
 
-int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy)
+void    set_cylinder_rec(t_hit_record *rec, t_util util, t_ray ray, t_cylinder *cy, t_vec h)
 {
-	double	a;
-	double	b;
-	double	c;
-	t_vec	h;
-	t_vec	w;
-	double	discriminant;
-	double	sqrtd;
-	double	root;
-	double	size;
+	t_vec	cp;
+	t_vec	qp;
 
-	// 원기둥 top center, base center 구하기
-	t_vec	max;
-	t_vec	min;
+    rec->tmax = util.root;
+	rec->t = util.root;
+	rec->p = ray_at(ray, rec->t);
+	rec->albedo = cy->color;
+	cp = vec_sub(rec->p, cy->base_center);
+	qp = vec_sub(cp, vec_mul(h, vec_dot(cp, h)));
+	rec->normal = vec_unit(qp);
+	rec->normal = set_face_normal(rec->normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
+}
+
+void get_top_base_center(t_cylinder *cy)
+{
 	t_ray	up;
-	up.dir = cy->normal;
+	t_ray	down;
+
+	up.dir = vec_unit(cy->normal);
 	up.origin = cy->center;
 	up.t = cy->height / 2;
-	max = ray_at(up, cy->height / 2);
-	t_ray	down;
-	down.dir = vec_mul(cy->normal, -1);
+	cy->top_center = ray_at(up, up.t);
+	down.dir = vec_unit(vec_mul(cy->normal, -1));
 	down.origin = cy->center;
 	down.t = cy->height / 2;
-	min = ray_at(down, cy->height / 2);
+	cy->base_center = ray_at(down, down.t);
+}
 
-	//  판별식에 사용할 a, b, c 구하기
-	h = vec_div(vec_sub(max, min), vec_length(vec_sub(max, min)));
-	// h = vec_unit(cy->normal);
-	a = vec_dot(ray.dir, ray.dir) - vec_dot(ray.dir, h) * vec_dot(ray.dir, h);
+int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy)
+{
+	t_util  util;
+	t_vec	h;
+	t_vec	w;
+	double	size;
 
-	w = vec_sub(ray.origin, min);
-	b = vec_dot(ray.dir, w) - vec_dot(ray.dir, h) * vec_dot(w, h);
-	b *= 2;
-
-	c = vec_dot(w, w) - vec_dot(w, h) * vec_dot(w, h) - cy->radius * cy->radius;
-
-	// 판별식
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
+	get_top_base_center(cy);
+	h = vec_div(vec_sub(cy->top_center, cy->base_center), cy->height);
+	w = vec_sub(ray.origin, cy->base_center);
+	util.a = vec_dot(ray.dir, ray.dir) - vec_dot(ray.dir, h) * vec_dot(ray.dir, h);
+	util.b = vec_dot(ray.dir, w) - vec_dot(ray.dir, h) * vec_dot(w, h);
+	util.b *= 2;
+	util.c = vec_dot(w, w) - vec_dot(w, h) * vec_dot(w, h) - (cy->radius * cy->radius);
+	if (get_root(&util, rec) == 0)  // 이거 enum으로 해 없다고 표시하면 좋을 듯
 		return (0);
-	sqrtd = sqrt(discriminant);
-    root = (-b - sqrtd) / (2 * a);
-	if (root < rec->tmin || root > rec->tmax)
-	{
-		root = (-b + sqrtd) / (2 * a);
-		if (root < rec->tmin || root > rec->tmax)
-			return (0);
-	}
-
-	// 해가 있다면 기둥인지, 바닥인지 확인하고 높이 만큼만 그려주기
-	size = vec_dot(vec_sub(ray_at(ray, root), min), h);
+	size = vec_dot(vec_sub(ray_at(ray, util.root), cy->base_center), h);
 	if (size < 0.0)
-		return (is_base(rec, ray, cy, min));
-	if (size > vec_length(vec_sub(max, min)))
-		return (is_top(rec, ray, cy, max));
-	if (size >= 0 && size <= vec_length(vec_sub(max, min)))
+		return (is_base(rec, ray, cy, cy->base_center));
+	if (size > cy->height)
+		return (is_top(rec, ray, cy, cy->top_center));
+	if (size >= 0 && size <= cy->height)
 	{
-		rec->tmax = root;
-		rec->t = root;
-		rec->p = ray_at(ray, rec->t);
-		rec->albedo = cy->color;
-
-		t_vec cp = vec_sub(rec->p, min);
-		t_vec qp = vec_sub(cp, vec_mul(h, vec_dot(cp, h)));
-		rec->normal = vec_unit(qp);
-		// rec->normal = set_face_normal(rec->normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
+		set_cylinder_rec(rec, util, ray, cy, h);   // 이거 인자 5개임
 		return (1);
 	}
 	return (0);

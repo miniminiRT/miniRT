@@ -25,14 +25,9 @@ int	hit(t_scene *scene, t_ray r, t_hit_record *rec, int id)
 	{
 		if (iter->id != id)
 		{
-			if (hit_sphere(rec, r, iter->element))
-			{
-				hit_anything = 1;
-				tmp_rec.tmax = tmp_rec.t;
-				*rec = tmp_rec;
-			}
 			// 평면 추가하기
-			if (hit_cylinder(rec, r, iter->element))
+			if (hit_sphere(rec, r, iter->element)
+				|| hit_cylinder(rec, r, iter->element))
 			{
 				hit_anything = 1;
 				tmp_rec.tmax = tmp_rec.t;

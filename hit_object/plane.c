@@ -24,5 +24,5 @@ int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl)
 			return (1);
 		}
 	}
-	return (0);  // false
+	return (0);
 }
