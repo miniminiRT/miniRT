@@ -160,7 +160,7 @@ int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy)
 		rec->albedo = cy->color;
 
 		t_vec cp = vec_sub(rec->p, min);
-		t_vec qp = vec_sub(cp, vec_mul(cy->normal, vec_dot(cp, cy->normal)));
+		t_vec qp = vec_sub(cp, vec_mul(h, vec_dot(cp, h)));
 		rec->normal = vec_unit(qp);
 		// rec->normal = set_face_normal(rec->normal, ray);  // 안, 밖 고려해서 법선벡터 바꾸기
 		return (1);

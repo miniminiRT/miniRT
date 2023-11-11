@@ -149,6 +149,20 @@ typedef struct	s_phong{
 	double	light_len;
 }	t_phong;
 
+typedef struct s_setobj
+{
+	char		**center;
+	char		**albedo;
+	t_object	*object;
+	t_object	*iter;
+}	t_setobj;
+
+
+//setting object
+void	set_plane(t_scene *scene, char **res, int *id);
+void	set_cylinder(t_scene *scene, char **res, int *id);
+void	set_sphere(t_scene *scene, char **res, int *id);
+
 t_vec	vec(double x, double y, double z);
 t_vec	vec_add(t_vec v1, t_vec v2);
 t_vec	vec_sub(t_vec v1, t_vec v2);
@@ -192,7 +206,7 @@ t_scene set_scene(void);
 void print_scene(t_scene scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
 
-
+void	free_all(char **arr);
 double	ft_strtod(char	*src);
 int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
 int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
