@@ -1,4 +1,4 @@
-#include "miniRT.h"
+#include "../miniRT.h"
 
 void    set_rec(t_hit_record *rec, t_sphere *sp, t_ray ray, double root)
 {

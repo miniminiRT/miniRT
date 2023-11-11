@@ -1,4 +1,4 @@
-#include "miniRT.h"
+#include "../miniRT.h"
 
 int	is_base(t_hit_record *rec, t_ray ray, t_cylinder *cy, t_vec center)
 {
