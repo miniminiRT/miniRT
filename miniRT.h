@@ -70,6 +70,8 @@ typedef	struct s_cylinder
 	double	radius;
 	double	height;
 	t_vec	color;
+	t_vec	top_center;
+	t_vec	base_center;
 }	t_cylinder;
 
 
@@ -97,6 +99,8 @@ typedef struct s_util{
     double  b;
     double  c;
 	double  sqrtd;
+	double  root;
+    double  discriminant;
 }	t_util;
 
 enum	e_side{
@@ -211,5 +215,6 @@ double	ft_strtod(char	*src);
 int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
 int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
 t_vec	set_face_normal(t_vec normal, t_ray ray);
+int get_root(t_util *util, t_hit_record *rec);
 
 #endif

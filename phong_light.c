@@ -23,7 +23,6 @@ t_vec	reflect(t_vec v, t_vec n)
 
 	light_y_dir = vec_mul(n, vec_dot(v, n) * 2);
 	result = vec_sub(v, light_y_dir);
-	// 공식이 왜 이렇게 되는지 이해 안됨.
 	return (result);
 }
 

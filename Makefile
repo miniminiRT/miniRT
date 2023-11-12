@@ -14,16 +14,19 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 #-------------------------------------------
 
 SRC			=	main.c \
-				plane.c \
 				utils.c \
 				phong_light.c \
 				print_scene.c \
 				ray.c setting.c \
 				shadow.c \
-				vec_operator1.c \
-				vec_operator2.c \
-				vec_operator3.c \
-				setting_object.c
+				setting_object.c \
+				./hit_object/plane.c \
+				./hit_object/sphere.c \
+				./hit_object/cylinder.c \
+				./hit_object/utils.c \
+				./operator/vec_operator1.c \
+				./operator/vec_operator2.c \
+				./operator/vec_operator3.c
 OBJ			=	$(SRC:.c=.o)
 MLX_DIR 	= minilibx
 MLX			= libmlx.a
