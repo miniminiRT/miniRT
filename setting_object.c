@@ -6,7 +6,7 @@ void	set_plane(t_scene *scene, char **res, int *id)
 	t_plane		*plane;
 	t_setobj	set;
 
-	plane = malloc(sizeof(t_sphere));
+	plane = malloc(sizeof(t_plane));
 	set.center = ft_split(res[1], ',');
 	normal = ft_split(res[2], ',');
 	set.albedo = ft_split(res[3], ',');
