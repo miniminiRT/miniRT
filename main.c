@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:00:00 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/14 19:45:32 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/14 20:52:01 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ void	my_mlx(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	new_image(t_vars *vars)
+{
+	mlx_destroy_image(vars->mlx, vars->image.img);
+	vars->image.img = mlx_new_image(vars->mlx, 1500, 1000);
+	vars->image.addr = mlx_get_data_addr(vars->image.img,
+			&vars->image.bits_per_pixel,
+			&vars->image.line_length, &vars->image.endian);
+}
+
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
@@ -27,6 +36,12 @@ int	key_hook(int keycode, t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
+	new_image(vars);
+	if (keycode == MOVE_DOWN || keycode == MOVE_UP
+		|| keycode == MOVE_LEFT || keycode == MOVE_RIGHT
+			|| keycode == MOVE_FRONT || keycode == MOVE_BACK)
+		change_location(vars, keycode);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	return (0);
 }
 
