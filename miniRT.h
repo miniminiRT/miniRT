@@ -161,6 +161,13 @@ typedef struct s_setobj
 	t_object	*iter;
 }	t_setobj;
 
+typedef struct s_vars
+{
+	void		*mlx;
+	void		*win;
+	t_data		image;
+	t_scene		update;
+}	t_vars;
 
 //setting object
 void	set_plane(t_scene *scene, char **res, int *id);
@@ -207,7 +214,7 @@ t_vec	vec_mul_vec(t_vec v1, t_vec v2);
 t_vec	vec_min(t_vec v1, t_vec v2);
 
 t_scene set_scene(void);
-void print_scene(t_scene scene, t_data image);
+void print_scene(t_scene *scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
 
 void	free_all(char **arr);
@@ -216,5 +223,6 @@ int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
 int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
 t_vec	set_face_normal(t_vec normal, t_ray ray);
 int get_root(t_util *util, t_hit_record *rec);
+void	change_location(t_vars  *vars, int keycode);
 
 #endif

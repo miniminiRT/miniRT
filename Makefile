@@ -20,6 +20,7 @@ SRC			=	main.c \
 				ray.c setting.c \
 				shadow.c \
 				setting_object.c \
+				./hook/key_hook_move.c \
 				./hit_object/plane.c \
 				./hit_object/sphere.c \
 				./hit_object/cylinder.c \
