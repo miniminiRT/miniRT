@@ -51,6 +51,4 @@ void	change_location(t_vars  *vars, int keycode)
 		move_front(vars, &(vars->update));
 	else if (keycode == MOVE_BACK)  // E
 		move_back(vars, &(vars->update));
-	else
-		return ;
 }

@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:00:00 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/15 16:36:16 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:04:08 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ int	key_hook(int keycode, t_vars *vars)
 		change_location(vars, keycode);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	}
+	// if (keycode == ROTATE_UP || keycode == ROTATE_DOWN
+	// 	|| keycode == ROTATE_LEFT || keycode == ROTATE_RIGHT)
+	// {
+	// 	new_image(vars);
+	// 	change_angle(vars, keycode);
+	// 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
+	// }
 	return (0);
 }
 

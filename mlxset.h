@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:55:23 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/15 16:32:23 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:01:19 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define MOVE_DOWN 1
 # define MOVE_FRONT 12
 # define MOVE_BACK 14
+
+# define ROTATE_UP 126
+# define ROTATE_DOWN 125
+# define ROTATE_LEFT 123
+# define ROTATE_RIGHT 124
 
 typedef struct s_data
 {
