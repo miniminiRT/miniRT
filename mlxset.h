@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlxset.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:55:23 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/21 14:56:52 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/15 17:01:19 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 # define MLXSET_H
 
 # include <mlx.h>
+#include "miniRT.h"
 
-typedef struct s_vars
-{
-	void		*mlx;
-	void		*win;
-}	t_vars;
+# define MOVE_LEFT 0
+# define MOVE_RIGHT 2
+# define MOVE_UP 13
+# define MOVE_DOWN 1
+# define MOVE_FRONT 12
+# define MOVE_BACK 14
+
+# define ROTATE_UP 126
+# define ROTATE_DOWN 125
+# define ROTATE_LEFT 123
+# define ROTATE_RIGHT 124
 
 typedef struct s_data
 {
@@ -30,5 +37,12 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
+// typedef struct s_vars
+// {
+// 	void		*mlx;
+// 	void		*win;
+// 	t_data		image;
+// 	t_scene		update;
+// }	t_vars;
 
 #endif
