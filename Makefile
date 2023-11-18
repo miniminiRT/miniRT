@@ -19,7 +19,10 @@ SRC			=	main.c \
 				print_scene.c \
 				ray.c setting.c \
 				shadow.c \
-				setting_object.c \
+				setting_plane.c \
+				setting_cylinder.c \
+				setting_sphere.c \
+				setting_scene.c \
 				./hook/key_hook_move.c \
 				./hook/key_hook_rotate.c \
 				./hit_object/plane.c \
@@ -29,6 +32,7 @@ SRC			=	main.c \
 				./operator/vec_operator1.c \
 				./operator/vec_operator2.c \
 				./operator/vec_operator3.c
+				
 OBJ			=	$(SRC:.c=.o)
 MLX_DIR 	= minilibx
 MLX			= libmlx.a
