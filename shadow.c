@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:10:01 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/18 15:04:53 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:42:36 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,11 @@ int	hit(t_scene *scene, t_ray r, t_hit_record rec, int id)
 		if (iter->id != id)
 		{
 			if (iter->type == SPHERE)
-			{
 				hit_anything = hit_sphere(&rec, r, iter->element);
-			}
 			else if (iter->type == CYLINDER)
-			{
 				hit_anything = hit_cylinder(&rec, r, iter->element);
-			}
 			else if (iter->type == PLANE)
-			{
 				hit_anything = hit_plane(&rec, r, iter->element);
-			}
 			if (hit_anything == 1)
 				return (1);
 		}

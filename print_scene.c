@@ -30,7 +30,7 @@ int ray_color(t_ray ray, t_scene *scene)
 	scene->rec.tmax = INFINITY;
 	double rec_tmp = INFINITY;
 	int    tmp_id = -1;
-	scene->ambient.color = vec_mul(scene->ambient.color, ka);
+
 	obj_list = scene->objects;
 	while (obj_list)
 	{
