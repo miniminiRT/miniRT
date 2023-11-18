@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:00:00 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/15 17:04:08 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:43:14 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ int	key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
-int	exit_hook(void)
+int	exit_hook(t_vars *vars)
 {
+	mlx_destroy_window(vars->mlx, vars->win);
 	exit(0);
 }
 
@@ -74,7 +75,7 @@ int	main(void)
 	print_scene(&scene, vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_hook(vars.win, 17, 0, exit_hook, 0);
+	mlx_hook(vars.win, 17, 0, exit_hook, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
