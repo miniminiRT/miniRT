@@ -23,27 +23,36 @@ int ray_color(t_ray ray, t_scene *scene)
 {
     int             is_hit;
     t_vec           color;
-    t_object        *obj_list;
+	t_object        *obj_list;
 
-    color = vec(0, 0, 0);    // color값 초기화
-    scene->rec.tmin = 0;
-    scene->rec.tmax = INFINITY;
-    scene->ambient.color = vec_mul(scene->ambient.color, ka);
-    obj_list = scene->objects;
-    while (obj_list)
-    {
-        is_hit = 0;
-        if (obj_list->type == SPHERE)
-            is_hit = hit_sphere(&(scene->rec), ray, obj_list->element);
-        else if (obj_list->type == PLANE)
-            is_hit = hit_plane(&(scene->rec), ray, obj_list->element);
-        else if (obj_list->type == CYLINDER)
-            is_hit = hit_cylinder(&(scene->rec), ray, obj_list->element);
-        if (is_hit == 1)
-            color = phong_light(scene, obj_list->id);
-        obj_list = obj_list->next;
-    }
-    return (rgb_to_color(color));
+	color = vec(0, 0, 0);    // color값 초기화
+	scene->rec.tmin = 0;
+	scene->rec.tmax = INFINITY;
+	double rec_tmp = INFINITY;
+	int    tmp_id = -1;
+	scene->ambient.color = vec_mul(scene->ambient.color, ka);
+	obj_list = scene->objects;
+	while (obj_list)
+	{
+		is_hit = 0;
+		if (obj_list->type == SPHERE)
+			is_hit = hit_sphere(&(scene->rec), ray, obj_list->element);
+		else if (obj_list->type == PLANE)
+			is_hit = hit_plane(&(scene->rec), ray, obj_list->element);
+		else if (obj_list->type == CYLINDER)
+			is_hit = hit_cylinder(&(scene->rec), ray, obj_list->element);
+		if (is_hit == 1)
+		{
+			if (scene->rec.t < rec_tmp)
+			{
+				rec_tmp = scene->rec.t;
+				tmp_id = obj_list->id;
+			}
+		}
+		obj_list = obj_list->next;
+	}
+	color = phong_light(scene, tmp_id);
+	return (rgb_to_color(color));
 }
 
 t_vec   get_lower_left_corner(t_scene *scene, t_vec horizontal, t_vec vertical, t_vec w)

@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/02 16:22:54 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:18:56 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ t_vec	point_light_get(t_scene *scene, t_light *light, int id, int *is_shadow)
 {
 	t_phong	arg;
 
+	*is_shadow = 0;
 	arg.light_dir = vec_sub(light->origin, scene->rec.p);
 	arg.light_len = vec_length(arg.light_dir);
 	arg.light_ray = ray(vec_add(scene->rec.p, \
-		vec_mul(scene->rec.normal, EPSILON)), arg.light_dir);
+		vec_mul(vec_unit(arg.light_dir), EPSILON)), vec_unit(arg.light_dir));
 	if (in_shadow(scene, arg.light_ray, arg.light_len, id))
 	{
 		*is_shadow = 1;
@@ -62,10 +63,12 @@ t_vec	phong_light(t_scene	*scene, int id)
 	int		is_shadow;
 
 	light_color = vec(0, 0, 0);
-	is_shadow = 0;
 	tmp = scene->lights;
+	if (id == -1)
+		return (light_color);
 	while (tmp)
 	{
+		is_shadow = 0;
 		light_color = \
 			vec_add(light_color, point_light_get(scene, tmp, id, &is_shadow));
 		if (is_shadow == 1)
