@@ -25,7 +25,7 @@ typedef struct s_vec{
 typedef struct s_viewport{
 	int		width;
 	int		height;
-	double	focal_length;	
+	double	focal_length;
 	// double	aspect_ratio;
 }	t_viewport;
 
@@ -146,8 +146,6 @@ typedef struct	s_phong{
 	t_vec	view_dir;
 	t_vec	reflect_dir;
 	double	spec;
-	double	ksn;
-	double	ks;
 	double	brightness;
 	t_vec	light_sum;
 	t_ray	light_ray;
@@ -169,6 +167,16 @@ typedef struct s_vars
 	t_data		image;
 	t_scene		update;
 }	t_vars;
+
+typedef	struct s_set_viewport
+{
+	t_vec	lookfrom;
+	t_vec	lookat;
+	t_vec	vup;
+	t_vec	w;
+	t_vec	u;
+	t_vec	v;
+}	t_set_viewport;
 
 //setting object
 void	set_plane(t_scene *scene, char **res, int *id);
