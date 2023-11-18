@@ -66,10 +66,8 @@ void	set_lights(t_scene *scene, char **res)
 	lights->origin
 		= vec(ft_strtod(origin[0]), ft_strtod(origin[1]), ft_strtod(origin[2]));
 	lights->brightness = ft_strtod(res[2]);
-	printf("light : %f\n", lights->brightness);
 	lights->light_color = vec(ft_strtod(light_color[0]) \
 		, ft_strtod(light_color[1]), ft_strtod(light_color[2]));
-	printf("light color : %f, %f, %f\n", lights->light_color.x, lights->light_color.y, lights->light_color.z);
 	lights->next = NULL;
 	free_all(origin);
 	free_all(light_color);

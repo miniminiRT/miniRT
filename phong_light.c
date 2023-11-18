@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/18 14:48:14 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:18:56 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_vec	point_light_get(t_scene *scene, t_light *light, int id, int *is_shadow)
 	t_phong	arg;
 
 	*is_shadow = 0;
-	(void)id;
 	arg.light_dir = vec_sub(light->origin, scene->rec.p);
 	arg.light_len = vec_length(arg.light_dir);
 	arg.light_ray = ray(vec_add(scene->rec.p, \

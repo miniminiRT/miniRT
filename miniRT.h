@@ -225,5 +225,6 @@ int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
 t_vec	set_face_normal(t_vec normal, t_ray ray);
 int get_root(t_util *util, t_hit_record *rec);
 void	change_location(t_vars  *vars, int keycode);
+void	change_angle(t_vars  *vars, int keycode);
 
 #endif

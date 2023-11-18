@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 16:00:00 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/18 11:43:14 by jonhan           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "miniRT.h"
 
 void	my_mlx(t_data *data, int x, int y, int color)
@@ -44,13 +32,13 @@ int	key_hook(int keycode, t_vars *vars)
 		change_location(vars, keycode);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	}
-	// if (keycode == ROTATE_UP || keycode == ROTATE_DOWN
-	// 	|| keycode == ROTATE_LEFT || keycode == ROTATE_RIGHT)
-	// {
-	// 	new_image(vars);
-	// 	change_angle(vars, keycode);
-	// 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
-	// }
+	if (keycode == ROTATE_UP || keycode == ROTATE_DOWN
+		|| keycode == ROTATE_LEFT || keycode == ROTATE_RIGHT)
+	{
+		new_image(vars);
+		change_angle(vars, keycode);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
+	}
 	return (0);
 }
 

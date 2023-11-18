@@ -131,7 +131,6 @@ void	set_sphere(t_scene *scene, char **res, int *id)
 		set.object->next = NULL;
 		set.iter->next = set.object;
 	}
-	printf("%d\n", set.object->id);
 	free_all(set.albedo);
 	free_all(set.center);
 	return ;
