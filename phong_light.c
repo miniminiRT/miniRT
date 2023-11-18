@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/18 15:18:56 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:58:07 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,16 @@ t_vec	point_light_get(t_scene *scene, t_light *light, int id, int *is_shadow)
 	if (in_shadow(scene, arg.light_ray, arg.light_len, id))
 	{
 		*is_shadow = 1;
-		return (vec(0, 0, 0));
+		// return (vec(0, 0, 0));
 	}
 	arg.light_dir = vec_unit(arg.light_dir);
 	arg.kd = fmax(vec_dot(scene->rec.normal, arg.light_dir), 0.0);
-	arg.diffuse = vec_mul(light->light_color, arg.kd);
+	if (*is_shadow == 1)
+	{
+		arg.diffuse = vec_mul(vec(0, 0, 0), arg.kd);
+	}
+	else
+		arg.diffuse = vec_mul(light->light_color, arg.kd);
 	arg.view_dir = vec_unit(vec_mul(scene->ray.dir, -1));
 	arg.reflect_dir = reflect(vec_mul(arg.light_dir, -1), scene->rec.normal);
 	arg.ksn = 64;
@@ -73,12 +78,11 @@ t_vec	phong_light(t_scene	*scene, int id)
 			vec_add(light_color, point_light_get(scene, tmp, id, &is_shadow));
 		if (is_shadow == 1)
 		{
-			light_color = vec(0, 0, 0);
 			break ;
 		}
 		tmp = tmp->next;
 	}
-	light_color = vec_add(light_color, scene->ambient.color);
+	light_color = vec_add(light_color, vec_mul(scene->ambient.color, KA));
 	light_sum = vec_mul_vec(light_color, scene->rec.albedo);
 	return (vec_min(light_sum, vec(1, 1, 1)));
 }

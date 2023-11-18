@@ -59,6 +59,7 @@ int	main(void)
 	vars.image.addr = mlx_get_data_addr(vars.image.img, &(vars.image.bits_per_pixel),
 			&(vars.image.line_length), &(vars.image.endian));
 	scene = set_scene();
+
 	vars.update = scene;    // hook을 위해 초기값 가지고있음.
 	print_scene(&scene, vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
