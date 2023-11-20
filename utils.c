@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/11 18:27:41 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:26:24 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+t_vec	set_face_normal(t_vec normal, t_ray ray)
+{
+	if (vec_dot(ray.dir, normal) > 0.0)
+		return (vec(-normal.x, -normal.y, -normal.z));
+	return (normal);
+}
 
 int	is_valid(char **str, char *src)
 {
@@ -50,7 +57,7 @@ double	ft_strtod(char	*src)
 	decimal_num = 0.0;
 	if (!is_valid(str, src))
 	{
-		printf("parsing error\n");	
+		printf("parsing error\n");
 		exit(1);    // 파싱 ㅇㅔ러처리하기
 	}
 	if (str[0])

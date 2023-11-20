@@ -16,13 +16,14 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 SRC			=	main.c \
 				utils.c \
 				phong_light.c \
-				print_scene.c \
 				ray.c setting.c \
 				shadow.c \
 				setting_plane.c \
 				setting_cylinder.c \
 				setting_sphere.c \
 				setting_scene.c \
+				./print_scene/print_scene.c \
+				./print_scene/print_scene_utils.c \
 				./hook/key_hook_move.c \
 				./hook/key_hook_rotate.c \
 				./hit_object/plane.c \
@@ -32,7 +33,7 @@ SRC			=	main.c \
 				./operator/vec_operator1.c \
 				./operator/vec_operator2.c \
 				./operator/vec_operator3.c
-				
+
 OBJ			=	$(SRC:.c=.o)
 MLX_DIR 	= minilibx
 MLX			= libmlx.a
@@ -55,7 +56,7 @@ $(NAME):  $(OBJ) $(HEADER) $(MLX) $(LIBFT)
 
 %.o: 		%.c
 		@$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
-	
+
 $(MLX):
 	make -C $(MLX_DIR)
 
@@ -76,5 +77,5 @@ fclean:		clean
 
 re:			$(MAKE) fclean
 			$(MAKE) all
-			
+
 .PHONY:		clean fclean re

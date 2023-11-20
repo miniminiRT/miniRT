@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 12:45:15 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/20 14:06:40 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../miniRT.h"
 
 int	get_root(t_util *util, t_hit_record *rec)
@@ -7,10 +19,7 @@ int	get_root(t_util *util, t_hit_record *rec)
 	if (util->discriminant < 0)
 		return (0);
 	util->sqrtd = sqrt(util->discriminant);
-    util->root = (-util->b - util->sqrtd) / (2 * util->a);
-	// util->root1 = (-util->b + util->sqrtd) / (2 * util->a);
-	// if (util->root > util->root1)
-	// 	util->root = util->root1;
+	util->root = (-util->b - util->sqrtd) / (2 * util->a);
 	if (util->root < rec->tmin || util->root > rec->tmax)
 	{
 		util->root = (-util->b + util->sqrtd) / (2 * util->a);
