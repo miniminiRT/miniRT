@@ -226,6 +226,14 @@ t_vec	vec_unit(t_vec v);
 t_vec	vec_mul_vec(t_vec v1, t_vec v2);
 t_vec	vec_min(t_vec v1, t_vec v2);
 
+// print_scene_utils
+int		rgb_to_color(t_vec color);
+t_vec	get_lower_left_corner(t_scene *scene, \
+			t_vec horizontal, t_vec vertical, t_vec w);
+t_vec	get_ray_dir(t_print p, t_ray ray);
+void	set_viewport_vector(t_set_viewport *sv, t_scene *scene);
+void	set_print_vector(t_scene *scene, t_print *print_vec, t_set_viewport sv);
+
 t_scene set_scene(void);
 void print_scene(t_scene *scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);

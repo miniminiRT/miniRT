@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/18 19:45:07 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:20:11 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_vec	point_light_get(t_scene *scene, t_light *light, int id, int *is_shadow)
 	arg.light_sum = vec_add(arg.diffuse, arg.specular);
 	return (vec_mul(arg.light_sum, arg.brightness));
 }
-
 
 t_vec	phong_light(t_scene	*scene, int id)
 {
