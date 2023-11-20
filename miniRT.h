@@ -4,7 +4,6 @@
 
 # include <stdio.h>
 # include <math.h>
-# include <stdlib.h>
 # include <fcntl.h>
 # include "mlxset.h"
 # include "libft/libft.h"
@@ -31,9 +30,9 @@ typedef struct s_viewport{
 
 typedef struct s_size
 {
-    int     width;
-    int     height;
-    double  aspect_ratio;
+	int     width;
+	int     height;
+	double  aspect_ratio;
 }   t_size;
 
 typedef struct s_camera{
@@ -66,9 +65,9 @@ typedef	struct s_plane
 typedef	struct s_cylinder
 {
 	t_vec	center;
-	t_vec	normal;
 	double	radius;
 	double	height;
+	t_vec	normal;
 	t_vec	color;
 	t_vec	top_center;
 	t_vec	base_center;
@@ -96,12 +95,12 @@ typedef struct s_ray{
 typedef struct s_util{
 	t_vec   oc;
 	double  a;
-    double  b;
-    double  c;
+	double  b;
+	double  c;
 	double  sqrtd;
 	double  root;
 	double	root1;
-    double  discriminant;
+	double  discriminant;
 }	t_util;
 
 enum	e_side{
@@ -111,10 +110,10 @@ enum	e_side{
 
 typedef struct s_print{
 	t_vec   vertical;
-    t_vec	horizontal;
-    t_vec   lower_left_corner;
-    double  u;
-    double  v;
+	t_vec	horizontal;
+	t_vec   lower_left_corner;
+	double  u;
+	double  v;
 }	t_print;
 
 typedef struct s_hit_record{
