@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:09:11 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/20 15:10:43 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:01:55 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void	set_sphere_rec(t_hit_record *rec, t_sphere *sp, t_ray ray, double root)
 
 int	hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp)
 {
+	t_vec	oc;
 	t_util	util;
 
-	util.oc = vec_sub(ray.origin, sp->center);
+	oc = vec_sub(ray.origin, sp->center);
 	util.a = vec_dot(ray.dir, ray.dir);
-	util.b = 2.0 * vec_dot(util.oc, ray.dir);
-	util.c = vec_dot(util.oc, util.oc) - (sp->radius * sp->radius);
+	util.b = 2.0 * vec_dot(oc, ray.dir);
+	util.c = vec_dot(oc, oc) - (sp->radius * sp->radius);
 	if (get_root(&util, rec) == 0)
 		return (0);
 	set_sphere_rec(rec, sp, ray, util.root);
