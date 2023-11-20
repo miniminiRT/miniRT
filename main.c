@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 15:11:41 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/20 15:12:38 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 void	my_mlx(t_data *data, int x, int y, int color)
@@ -26,7 +38,7 @@ int	key_hook(int keycode, t_vars *vars)
 	}
 	if (keycode == MOVE_DOWN || keycode == MOVE_UP
 		|| keycode == MOVE_LEFT || keycode == MOVE_RIGHT
-			|| keycode == MOVE_FRONT || keycode == MOVE_BACK)
+		|| keycode == MOVE_FRONT || keycode == MOVE_BACK)
 	{
 		new_image(vars);
 		change_location(vars, keycode);
@@ -56,11 +68,11 @@ int	main(void)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1000, 562, "miniRT");
 	vars.image.img = mlx_new_image(vars.mlx, 1000, 562);
-	vars.image.addr = mlx_get_data_addr(vars.image.img, &(vars.image.bits_per_pixel),
+	vars.image.addr = \
+	mlx_get_data_addr(vars.image.img, &(vars.image.bits_per_pixel),
 			&(vars.image.line_length), &(vars.image.endian));
 	scene = set_scene();
-
-	vars.update = scene;    // hook을 위해 초기값 가지고있음.
+	vars.update = scene;
 	print_scene(&scene, vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_hook, &vars);

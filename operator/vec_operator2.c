@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_operator2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 10:18:30 by jonhan            #+#    #+#             */
-/*   Updated: 2023/10/22 10:31:01 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/20 15:15:05 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ double	length_squared(double x, double y, double z)
 	return (x * x + y * y + z * z);
 }
 
-// 벡터의 크기
 double	vec_length(t_vec v1)
 {
 	double	value;
@@ -26,13 +25,11 @@ double	vec_length(t_vec v1)
 	return (value);
 }
 
-// 벡터의 내적
 double	vec_dot(t_vec v1, t_vec v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
 
-// 벡터의 외적
 t_vec	vec_cross(t_vec v1, t_vec v2)
 {
 	t_vec	out;
@@ -43,7 +40,6 @@ t_vec	vec_cross(t_vec v1, t_vec v2)
 	return (out);
 }
 
-// 단위벡터
 t_vec	vec_unit(t_vec v)
 {
 	double	len;
