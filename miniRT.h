@@ -71,6 +71,7 @@ typedef	struct s_cylinder
 	t_vec	color;
 	t_vec	top_center;
 	t_vec	base_center;
+	t_vec	h;
 }	t_cylinder;
 
 
@@ -93,7 +94,7 @@ typedef struct s_ray{
 }	t_ray;
 
 typedef struct s_util{
-	t_vec   oc;
+	// t_vec   oc;
 	double  a;
 	double  b;
 	double  c;
@@ -245,5 +246,6 @@ t_vec	set_face_normal(t_vec normal, t_ray ray);
 int get_root(t_util *util, t_hit_record *rec);
 void	change_location(t_vars  *vars, int keycode);
 void	change_angle(t_vars  *vars, int keycode);
+void	get_src_for_disciminant(t_util	*util, t_ray ray, t_cylinder *cy);
 
 #endif
