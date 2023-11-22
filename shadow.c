@@ -15,11 +15,11 @@
 int	hit(t_scene *scene, t_ray r, t_hit_record rec, int id)
 {
 	int				hit_anything;
-	t_hit_record	tmp_rec;
+	// t_hit_record	tmp_rec;
 	t_object		*iter;
 
 	hit_anything = 0;
-	tmp_rec = rec;
+	// tmp_rec = rec;
 	iter = scene->objects;
 	while (iter)
 	{

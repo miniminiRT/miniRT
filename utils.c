@@ -19,33 +19,37 @@ t_vec	set_face_normal(t_vec normal, t_ray ray)
 	return (normal);
 }
 
-// int	is_valid(char **str, char *src)
-// {
-// 	if (src[0] == '.')
-// 		return (0);
-// 	if (str[0] && ft_atoi(str[0]) == 0)
-// 	{
-// 		if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), "0", ft_strlen(str[0])))
-// 		{
-// 			if (!str[1])
-// 				return (1);
-// 			if (str[1] && !ft_strncmp(ft_itoa((ft_atoi(str[1]))), str[1], ft_strlen(str[1])))
-// 				return (1);
-// 		}
-// 	}
-// 	if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), str[0], ft_strlen(str[0])))
-// 	{
-// 		if (!str[1])
-// 			return (1);
-// 		if (str[1] && !ft_strncmp(ft_itoa((ft_atoi(str[1]))), str[1], ft_strlen(str[1])))
-// 			return (1);
-// 	}
-// 	return (0);
-// }
-
-int	is_valid(char **str)
+int	is_invalid(char **str)
 {
+	int	i;
 
+	i = 0;
+	if (str[0])
+	{
+		if (str[0][0] == '-')
+		{
+			if (!(str[0][1] >= '1' && str[0][1] <= '9'))
+				return (1);
+			i++;
+		}
+		while (str[0][i])
+		{
+			if (!(str[0][i] >= '0' && str[0][i] <= '9'))
+				return (1);
+			i++;
+		}
+	}
+	else if (str[1])
+	{
+		i = 0;
+		while (str[1][i])
+		{
+			if (!(str[0][i] >= '0' && str[0][i] <= '9'))
+				return (1);
+			i++;
+		}
+	}
+	return (0);
 }
 
 double	ft_strtod(char	*src)
@@ -57,8 +61,11 @@ double	ft_strtod(char	*src)
 	char	**str;
 
 	str = ft_split(src, '.');
-	if (is_valid(str))
-		return (-1);
+	if (is_invalid(str))
+	{
+		printf("invalide input error\n");
+		exit(0);
+	}
 	minus = 1;
 	natural_num = 0.0;
 	decimal_num = 0.0;
