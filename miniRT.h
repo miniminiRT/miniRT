@@ -234,12 +234,17 @@ t_vec	get_ray_dir(t_print p, t_ray ray);
 void	set_viewport_vector(t_set_viewport *sv, t_scene *scene);
 void	set_print_vector(t_scene *scene, t_print *print_vec, t_set_viewport sv);
 
-t_scene set_scene(void);
+t_scene	set_scene(char *argv);
 void print_scene(t_scene *scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
 
 void	free_all(char **arr);
 double	ft_strtod(char	*src);
+int		count_dot(char *str);
+int		arr_size(char **str);
+void	error(void);
+void	file_name_check(char *f_name);
+
 int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
 int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
 t_vec	set_face_normal(t_vec normal, t_ray ray);

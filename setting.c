@@ -6,9 +6,13 @@ void	set_camera(t_scene *scene, char **res)
 	char	**dir;
 
 	origin = ft_split(res[1], ',');
+	if (count_dot(res[1]) != 2 || arr_size(origin) != 3)
+		error();
 	scene->camera.origin
 		= vec(ft_strtod(origin[0]), ft_strtod(origin[1]), ft_strtod(origin[2]));
 	dir = ft_split(res[2], ',');
+	if (count_dot(res[2]) != 2 || arr_size(dir) != 3)
+		error();
 	scene->camera.dir
 		= vec(ft_strtod(dir[0]), ft_strtod(dir[1]), ft_strtod(dir[2]));
 	scene->camera.fov = ft_strtod(res[3]);
@@ -21,6 +25,8 @@ void	set_ambient(t_scene *scene, char **res)
 	char	**color;
 
 	color = ft_split(res[2], ',');
+	if (count_dot(res[2]) != 2 || arr_size(color) != 3)
+		error();
 	scene->ambient.light_ratio = ft_strtod(res[1]);
 	scene->ambient.color.x = ft_strtod(color[0]);
 	scene->ambient.color.y = ft_strtod(color[1]);
@@ -29,7 +35,7 @@ void	set_ambient(t_scene *scene, char **res)
 	return ;
 }
 
-void	set_light_list(t_scene *scene, t_light	*lights)
+void    set_light_list(t_scene *scene, t_light  *lights)
 {
 	t_light	*iter;
 
@@ -54,7 +60,11 @@ void	set_lights(t_scene *scene, char **res)
 	if (!lights)
 		exit(1);
 	origin = ft_split(res[1], ',');
+	if (count_dot(res[1]) != 2 || arr_size(origin) != 3)
+		error();
 	color = ft_split(res[3], ',');
+	if (count_dot(res[3]) != 2 || arr_size(color) != 3)
+		error();
 	lights->origin
 		= vec(ft_strtod(origin[0]), ft_strtod(origin[1]), ft_strtod(origin[2]));
 	lights->brightness = ft_strtod(res[2]);
@@ -77,3 +87,4 @@ void	set_objects(t_scene *scene, char **res, int *id)
 	(*id)++;
 	return ;
 }
+

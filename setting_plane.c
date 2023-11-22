@@ -31,8 +31,14 @@ void	set_plane(t_scene *scene, char **res, int *id)
 	if (!plane)
 		exit(1);
 	set.center = ft_split(res[1], ',');
+	if (count_dot(res[1]) != 2 || arr_size(set.center) != 3)
+		error();
 	normal = ft_split(res[2], ',');
+	if (count_dot(res[2]) != 2 || arr_size(normal) != 3)
+		error();
 	set.albedo = ft_split(res[3], ',');
+	if (count_dot(res[3]) != 2 || arr_size(set.albedo) != 3)
+		error();
 	plane->point = vec(ft_strtod(set.center[0]), \
 		ft_strtod(set.center[1]), ft_strtod(set.center[2]));
 	plane->normal

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:11:41 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/20 16:53:25 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:04:15 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,29 @@ int	exit_hook(t_vars *vars)
 	exit(0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	t_scene	scene;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1000, 562, "miniRT");
-	vars.image.img = mlx_new_image(vars.mlx, 1000, 562);
-	vars.image.addr = \
-	mlx_get_data_addr(vars.image.img, &(vars.image.bits_per_pixel),
-			&(vars.image.line_length), &(vars.image.endian));
-	scene = set_scene();
-	vars.update = scene;
-	print_scene(&scene, vars.image);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_hook(vars.win, 17, 0, exit_hook, &vars);
-	mlx_loop(vars.mlx);
+	if (argc == 2)
+	{
+		file_name_check(argv[1]);
+		vars.mlx = mlx_init();
+		vars.win = mlx_new_window(vars.mlx, 1000, 562, "miniRT");
+		vars.image.img = mlx_new_image(vars.mlx, 1000, 562);
+		vars.image.addr = \
+		mlx_get_data_addr(vars.image.img, &(vars.image.bits_per_pixel),
+				&(vars.image.line_length), &(vars.image.endian));
+		scene = set_scene(argv[1]);
+		vars.update = scene;
+		print_scene(&scene, vars.image);
+		mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
+		mlx_key_hook(vars.win, key_hook, &vars);
+		mlx_hook(vars.win, 17, 0, exit_hook, &vars);
+		mlx_loop(vars.mlx);
+	}
+	else
+		error();
 	return (0);
 }

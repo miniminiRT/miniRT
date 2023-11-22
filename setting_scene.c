@@ -29,7 +29,7 @@ void	init_scene(t_scene *scene)
 	return ;
 }
 
-t_scene	set_scene(void)
+t_scene	set_scene(char *argv)
 {
 	t_scene	scene;
 	char	*str;
@@ -38,16 +38,17 @@ t_scene	set_scene(void)
 	int		id;
 
 	id = 0;
-	//file open 함수 만들어야 할듯
-	fd = open("example.rt", O_RDONLY);
+	fd = open(argv, O_RDONLY);
+	if (fd < -1)
+		error();
 	str = get_next_line(fd);
+	if (!str)
+		error();
 	init_scene(&scene);
 	while (str)
 	{
 		str = ft_strtrim(str, "\n");
 		res = ft_split(str, ' ');
-		// if (invalid_input(res))
-		// 	exit(1);
 		if (ft_strncmp(res[0], "A", 1) == 0)
 			set_ambient(&scene, res);
 		else if (ft_strncmp(res[0], "C", 1) == 0)
