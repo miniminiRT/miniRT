@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/21 01:30:50 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:26:35 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ double	ft_strtod(char	*src)
 	return (minus * (natural_num + decimal_num));
 }
 
+void	error(void)
+{
+	write(2, "error\n", 6);
+	exit(1);
+}
+
 void	free_all(char **arr)
 {
 	int	i;
@@ -99,4 +105,3 @@ void	free_all(char **arr)
 	}
 	free(arr);
 }
-

@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:10:01 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/18 15:42:36 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/22 15:27:17 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int	hit(t_scene *scene, t_ray r, t_hit_record rec, int id)
 {
 	int				hit_anything;
-	// t_hit_record	tmp_rec;
 	t_object		*iter;
 
 	hit_anything = 0;
-	// tmp_rec = rec;
 	iter = scene->objects;
 	while (iter)
 	{

@@ -15,6 +15,7 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 SRC			=	main.c \
 				utils.c \
+				utils2.c \
 				phong_light.c \
 				setting.c \
 				shadow.c \
