@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/20 12:26:24 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/21 01:30:50 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,33 @@ t_vec	set_face_normal(t_vec normal, t_ray ray)
 	return (normal);
 }
 
-int	is_valid(char **str, char *src)
+// int	is_valid(char **str, char *src)
+// {
+// 	if (src[0] == '.')
+// 		return (0);
+// 	if (str[0] && ft_atoi(str[0]) == 0)
+// 	{
+// 		if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), "0", ft_strlen(str[0])))
+// 		{
+// 			if (!str[1])
+// 				return (1);
+// 			if (str[1] && !ft_strncmp(ft_itoa((ft_atoi(str[1]))), str[1], ft_strlen(str[1])))
+// 				return (1);
+// 		}
+// 	}
+// 	if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), str[0], ft_strlen(str[0])))
+// 	{
+// 		if (!str[1])
+// 			return (1);
+// 		if (str[1] && !ft_strncmp(ft_itoa((ft_atoi(str[1]))), str[1], ft_strlen(str[1])))
+// 			return (1);
+// 	}
+// 	return (0);
+// }
+
+int	is_valid(char **str)
 {
-	if (src[0] == '.')
-		return (0);
-	if (str[0] && ft_atoi(str[0]) == 0)
-	{
-		if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), "0", ft_strlen(str[0])))
-		{
-			if (!str[1])
-				return (1);
-			if (str[1] && !ft_strncmp(ft_itoa((ft_atoi(str[1]))), str[1], ft_strlen(str[1])))
-				return (1);
-		}
-	}
-	if (str[0] && !ft_strncmp(ft_itoa((ft_atoi(str[0]))), str[0], ft_strlen(str[0])))
-	{
-		if (!str[1])
-			return (1);
-		if (str[1] && !ft_strncmp(ft_itoa((ft_atoi(str[1]))), str[1], ft_strlen(str[1])))
-			return (1);
-	}
-	return (0);
+
 }
 
 double	ft_strtod(char	*src)
@@ -52,16 +57,17 @@ double	ft_strtod(char	*src)
 	char	**str;
 
 	str = ft_split(src, '.');
+	if (is_valid(str))
+		return (-1);
 	minus = 1;
 	natural_num = 0.0;
 	decimal_num = 0.0;
-	if (!is_valid(str, src))
-	{
-		printf("parsing error\n");
-		exit(1);    // 파싱 ㅇㅔ러처리하기
-	}
 	if (str[0])
+	{
 		natural_num = ft_atoi(str[0]);
+		if (str[0][0] == '-')
+			minus = -1;
+	}
 	if (str[1])
 	{
 		i = ft_strlen(str[1]);
@@ -69,11 +75,8 @@ double	ft_strtod(char	*src)
 		decimal_num /= pow(10, i);
 	}
 	if (natural_num < 0)
-	{
 		natural_num *= -1;
-		minus = -1;
-	}
-	//free(str);
+	free_all(str);
 	return (minus * (natural_num + decimal_num));
 }
 
