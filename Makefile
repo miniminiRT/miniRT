@@ -23,6 +23,8 @@ SRC			=	main.c \
 				setting_cylinder.c \
 				setting_sphere.c \
 				setting_scene.c \
+				error.c \
+				check_range.c \
 				./print_scene/print_scene.c \
 				./print_scene/print_scene_utils.c \
 				./hook/key_hook_move.c \

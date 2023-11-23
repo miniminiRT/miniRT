@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/22 15:26:35 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/22 15:35:45 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ double	ft_strtod(char	*src)
 
 	str = ft_split(src, '.');
 	if (is_invalid(str))
-	{
-		printf("invalide input error\n");
-		exit(0);
-	}
+		wrong_type_error();
 	minus = 1;
 	natural_num = 0.0;
 	decimal_num = 0.0;

@@ -40,6 +40,10 @@ void	set_sphere(t_scene *scene, char **res, int *id)
 		error();
 	sphere->albedo = vec(ft_strtod(set.albedo[0]), \
 		ft_strtod(set.albedo[1]), ft_strtod(set.albedo[2]));
+	if (range_check_color(sphere->albedo.x)
+		|| range_check_color(sphere->albedo.y)
+			|| range_check_color(sphere->albedo.z))
+		ratio_error(2);
 	free_all(set.albedo);
 	free_all(set.center);
 	set_sphere_list(scene, &set, id, (void *)sphere);

@@ -43,8 +43,16 @@ void	set_plane(t_scene *scene, char **res, int *id)
 		ft_strtod(set.center[1]), ft_strtod(set.center[2]));
 	plane->normal
 		= vec(ft_strtod(normal[0]), ft_strtod(normal[1]), ft_strtod(normal[2]));
+	if (range_check_vector(plane->normal.x)
+		|| range_check_vector(plane->normal.y)
+			|| range_check_vector(plane->normal.z))
+		ratio_error(3);
 	plane->color = vec(ft_strtod(set.albedo[0]), \
 		ft_strtod(set.albedo[1]), ft_strtod(set.albedo[2]));
+	if (range_check_color(plane->color.x)
+		|| range_check_color(plane->color.y)
+			|| range_check_color(plane->color.z))
+		ratio_error(2);
 	free_all(set.center);
 	free_all(normal);
 	free_all(set.albedo);
