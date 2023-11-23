@@ -41,10 +41,18 @@ void	set_cylinder(t_scene *scene, char **res, int *id)
 		ft_strtod(set.center[1]), ft_strtod(set.center[2]));
 	cylinder->normal = vec(ft_strtod(normal[0]), \
 		ft_strtod(normal[1]), ft_strtod(normal[2]));
+	if (range_check_vector(cylinder->normal.x)
+		|| range_check_vector(cylinder->normal.y)
+			|| range_check_vector(cylinder->normal.z))
+		ratio_error(3);
 	cylinder->radius = ft_strtod(res[3]);
 	cylinder->height = ft_strtod(res[4]);
 	cylinder->color = vec(ft_strtod(set.albedo[0]), \
 		ft_strtod(set.albedo[1]), ft_strtod(set.albedo[2]));
+	if (range_check_color(cylinder->color.x)
+		|| range_check_color(cylinder->color.y)
+			|| range_check_color(cylinder->color.z))
+		ratio_error(2);
 	free_all(set.center);
 	free_all(set.albedo);
 	free_all(normal);

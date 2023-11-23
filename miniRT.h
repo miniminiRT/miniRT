@@ -234,6 +234,17 @@ t_vec	get_ray_dir(t_print p, t_ray ray);
 void	set_viewport_vector(t_set_viewport *sv, t_scene *scene);
 void	set_print_vector(t_scene *scene, t_print *print_vec, t_set_viewport sv);
 
+// error
+void	wrong_type_error(void);
+void	ratio_error(int type);
+void	degree_error(void);
+
+// check_range
+int	range_check_light(double num);
+int	range_check_vector(double num);
+int	range_check_degree(double num);
+int	range_check_color(double num);
+
 t_scene	set_scene(char *argv);
 void print_scene(t_scene *scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);

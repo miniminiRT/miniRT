@@ -15,7 +15,13 @@ void	set_camera(t_scene *scene, char **res)
 		error();
 	scene->camera.dir
 		= vec(ft_strtod(dir[0]), ft_strtod(dir[1]), ft_strtod(dir[2]));
+	if (range_check_vector(scene->camera.dir.x)
+		|| range_check_vector(scene->camera.dir.y)
+			|| range_check_vector(scene->camera.dir.z))
+		ratio_error(3);
 	scene->camera.fov = ft_strtod(res[3]);
+	if (range_check_degree(scene->camera.fov))
+		degree_error();
 	free_all(origin);
 	free_all(dir);
 }
@@ -28,9 +34,15 @@ void	set_ambient(t_scene *scene, char **res)
 	if (count_dot(res[2]) != 2 || arr_size(color) != 3)
 		error();
 	scene->ambient.light_ratio = ft_strtod(res[1]);
+	if (range_check_light(scene->ambient.light_ratio))
+		ratio_error(1);
 	scene->ambient.color.x = ft_strtod(color[0]);
 	scene->ambient.color.y = ft_strtod(color[1]);
 	scene->ambient.color.z = ft_strtod(color[2]);
+	if (range_check_color(scene->ambient.color.x)
+		|| range_check_color(scene->ambient.color.y)
+			|| range_check_color(scene->ambient.color.z))
+		ratio_error(2);
 	free_all(color);
 	return ;
 }
@@ -68,8 +80,14 @@ void	set_lights(t_scene *scene, char **res)
 	lights->origin
 		= vec(ft_strtod(origin[0]), ft_strtod(origin[1]), ft_strtod(origin[2]));
 	lights->brightness = ft_strtod(res[2]);
+	if (range_check_light(lights->brightness))
+		ratio_error(1);
 	lights->light_color = vec(ft_strtod(color[0]), \
 		ft_strtod(color[1]), ft_strtod(color[2]));
+	if (range_check_color(lights->light_color.x)
+		|| range_check_color(lights->light_color.y)
+			|| range_check_color(lights->light_color.z))
+		ratio_error(2);
 	lights->next = NULL;
 	free_all(origin);
 	free_all(color);
