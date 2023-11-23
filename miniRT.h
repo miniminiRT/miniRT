@@ -1,4 +1,3 @@
-
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -182,6 +181,7 @@ void	set_objects(t_scene *scene, char **res, int *id);
 void	set_lights(t_scene *scene, char **res);
 void	set_ambient(t_scene *scene, char **res);
 void	set_camera(t_scene *scene, char **res);
+void	set_viewport(t_scene *scene);
 
 t_vec	vec(double x, double y, double z);
 t_vec	vec_add(t_vec v1, t_vec v2);

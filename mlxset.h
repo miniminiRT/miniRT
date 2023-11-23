@@ -6,7 +6,7 @@
 /*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:55:23 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/23 20:29:35 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/23 21:37:59 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }	t_data;
-
 
 #endif

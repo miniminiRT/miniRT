@@ -9,19 +9,6 @@ void	set_size(t_scene *scene)
 	return ;
 }
 
-void	set_viewport(t_scene *scene)
-{
-	double	theta;
-	double	h;
-
-	theta = (scene->camera.fov * M_PI) / 180.0;
-	h = tan(theta / 2);
-	scene->viewport.focal_length = 1.0;
-	scene->viewport.height = 2.0 * h * scene->viewport.focal_length;
-	scene->viewport.width = scene->size.aspect_ratio * scene->viewport.height;
-	return ;
-}
-
 void	init_scene(t_scene *scene)
 {
 	scene->objects = NULL;

@@ -10,7 +10,6 @@ void	set_cylinder_list(t_scene *scene, t_setobj *set, int *id, void *element)
 	set->object->element = element;
 	set->object->next = NULL;
 	if (!scene->objects)
-
 		scene->objects = set->object;
 	else
 	{
