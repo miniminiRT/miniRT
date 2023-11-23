@@ -25,15 +25,14 @@ typedef struct s_viewport{
 	int		width;
 	int		height;
 	double	focal_length;
-	// double	aspect_ratio;
 }	t_viewport;
 
 typedef struct s_size
 {
-	int     width;
-	int     height;
-	double  aspect_ratio;
-}   t_size;
+	int		width;
+	int		height;
+	double	aspect_ratio;
+}	t_size;
 
 typedef struct s_camera{
 	t_vec	origin;
@@ -46,7 +45,6 @@ typedef struct s_object{
 	enum e_type		type;
 	void			*element;
 	struct s_object	*next;
-	// t_vec	albedo;
 }	t_object;
 
 typedef struct s_sphere{
@@ -55,14 +53,14 @@ typedef struct s_sphere{
 	double	radius;
 }	t_sphere;
 
-typedef	struct s_plane
+typedef struct s_plane
 {
 	t_vec	point;
 	t_vec	normal;
 	t_vec	color;
 }	t_plane;
 
-typedef	struct s_cylinder
+typedef struct s_cylinder
 {
 	t_vec	center;
 	double	radius;
@@ -74,16 +72,15 @@ typedef	struct s_cylinder
 	t_vec	h;
 }	t_cylinder;
 
-
-typedef	struct	s_ambient{
+typedef struct s_ambient{
 	t_vec	color;
 	double	light_ratio;
 }	t_ambient;
 
 typedef struct s_light{
-	t_vec	origin;
-	t_vec	light_color;
-	double	brightness;
+	t_vec			origin;
+	t_vec			light_color;
+	double			brightness;
 	struct s_light	*next;
 }	t_light;
 
@@ -94,14 +91,13 @@ typedef struct s_ray{
 }	t_ray;
 
 typedef struct s_util{
-	// t_vec   oc;
-	double  a;
-	double  b;
-	double  c;
-	double  sqrtd;
-	double  root;
+	double	a;
+	double	b;
+	double	c;
+	double	sqrtd;
+	double	root;
 	double	root1;
-	double  discriminant;
+	double	discriminant;
 }	t_util;
 
 enum	e_side{
@@ -110,16 +106,16 @@ enum	e_side{
 };
 
 typedef struct s_print{
-	t_vec   vertical;
+	t_vec	vertical;
 	t_vec	horizontal;
-	t_vec   lower_left_corner;
-	double  u;
-	double  v;
+	t_vec	lower_left_corner;
+	double	u;
+	double	v;
 }	t_print;
 
 typedef struct s_hit_record{
-	t_vec		p; //object와 ray의 교점;
-	t_vec		normal; //법선벡터
+	t_vec		p;
+	t_vec		normal;
 	enum e_side	side;
 	double		tmin;
 	double		tmax;
@@ -128,17 +124,17 @@ typedef struct s_hit_record{
 }	t_hit_record;
 
 typedef struct s_scene{
-	t_viewport	viewport;
-	t_camera	camera;
-	t_size		size;
-	t_object	*objects;
-	t_light		*lights;
-	t_ray		ray;
-	t_ambient	ambient;
+	t_viewport		viewport;
+	t_camera		camera;
+	t_size			size;
+	t_object		*objects;
+	t_light			*lights;
+	t_ray			ray;
+	t_ambient		ambient;
 	t_hit_record	rec;
 }	t_scene;
 
-typedef struct	s_phong{
+typedef struct s_phong{
 	t_vec	diffuse;
 	t_vec	light_dir;
 	double	kd;
@@ -168,7 +164,7 @@ typedef struct s_vars
 	t_scene		update;
 }	t_vars;
 
-typedef	struct s_set_viewport
+typedef struct s_set_viewport
 {
 	t_vec	lookfrom;
 	t_vec	lookat;
@@ -200,7 +196,7 @@ t_vec	vec_unit(t_vec v);
 
 t_vec	vec_mul_vec(t_vec v1, t_vec v2);
 t_ray	ray(t_vec origin, t_vec dir);
-int	hit(t_scene *scene, t_ray r, t_hit_record rec, int id);
+int		hit(t_scene *scene, t_ray r, t_hit_record rec, int id);
 int		hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp);
 int		in_shadow(t_scene *scene, t_ray r, double light_len, int id);
 t_vec	reflect(t_vec v, t_vec n);
@@ -240,28 +236,28 @@ void	ratio_error(int type);
 void	degree_error(void);
 
 // check_range
-int	range_check_light(double num);
-int	range_check_vector(double num);
-int	range_check_degree(double num);
-int	range_check_color(double num);
+int		range_check_light(double num);
+int		range_check_vector(double num);
+int		range_check_degree(double num);
+int		range_check_color(double num);
 
 t_scene	set_scene(char *argv);
-void print_scene(t_scene *scene, t_data image);
+void	print_scene(t_scene *scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
 
 void	free_all(char **arr);
-double	ft_strtod(char	*src);
+double	ft_strtod(char *src);
 int		count_dot(char *str);
 int		arr_size(char **str);
 void	error(void);
 void	file_name_check(char *f_name);
 
-int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
-int	hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
+int		hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
+int		hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
 t_vec	set_face_normal(t_vec normal, t_ray ray);
-int get_root(t_util *util, t_hit_record *rec);
-void	change_location(t_vars  *vars, int keycode);
-void	change_angle(t_vars  *vars, int keycode);
+int		get_root(t_util *util, t_hit_record *rec);
+void	change_location(t_vars *vars, int keycode);
+void	change_angle(t_vars *vars, int keycode);
 void	get_src_for_disciminant(t_util	*util, t_ray ray, t_cylinder *cy);
 void	set_light_list(t_scene *scene, t_light *lights);
 void	light_vec_check(char **res, char **origin, char **color);
