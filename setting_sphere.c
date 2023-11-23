@@ -10,7 +10,6 @@ void	set_sphere_list(t_scene *scene, t_setobj *set, int *id, void *element)
 	set->object->element = element;
 	set->object->next = NULL;
 	if (!scene->objects)
-
 		scene->objects = set->object;
 	else
 	{
@@ -42,7 +41,7 @@ void	set_sphere(t_scene *scene, char **res, int *id)
 		ft_strtod(set.albedo[1]), ft_strtod(set.albedo[2]));
 	if (range_check_color(sphere->albedo.x)
 		|| range_check_color(sphere->albedo.y)
-			|| range_check_color(sphere->albedo.z))
+		|| range_check_color(sphere->albedo.z))
 		ratio_error(2);
 	free_all(set.albedo);
 	free_all(set.center);

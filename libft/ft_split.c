@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 11:07:18 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/03/19 16:25:24 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:23:44 by jonhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	**ft_split(char const *s, char c)
 	word_cnt = count(s, c);
 	result = (char **)malloc(sizeof(char *) * (word_cnt + 1));
 	if (!result)
-		return (0);
+		exit(1);
 	idx = 0;
 	i = 0;
 	while (s[idx] != 0 && i < word_cnt)
