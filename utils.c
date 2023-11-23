@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/22 15:35:45 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:24:05 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_vec	set_face_normal(t_vec normal, t_ray ray)
 		return (vec(-normal.x, -normal.y, -normal.z));
 	return (normal);
 }
-
 
 int	is_invalid(char **str, int idx)
 {
