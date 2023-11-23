@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/22 15:35:45 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:24:05 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,25 @@ t_vec	set_face_normal(t_vec normal, t_ray ray)
 	return (normal);
 }
 
-int	is_invalid(char **str)
+int	is_invalid(char **str, int idx)
 {
 	int	i;
 
 	i = 0;
-	if (str[0])
+	if (idx == 0)
 	{
-		if (str[0][0] == '-')
+		if (str[idx][0] == '-')
 		{
-			if (!(str[0][1] >= '1' && str[0][1] <= '9'))
-				return (1);
-			i++;
-		}
-		while (str[0][i])
-		{
-			if (!(str[0][i] >= '0' && str[0][i] <= '9'))
+			if (!str[idx][1])
 				return (1);
 			i++;
 		}
 	}
-	else if (str[1])
+	if (str[idx])
 	{
-		i = 0;
-		while (str[1][i])
+		while (str[idx][i])
 		{
-			if (!(str[0][i] >= '0' && str[0][i] <= '9'))
+			if (!(str[idx][i] >= '0' && str[idx][i] <= '9'))
 				return (1);
 			i++;
 		}
@@ -54,14 +47,13 @@ int	is_invalid(char **str)
 
 double	ft_strtod(char	*src)
 {
-	int		i;
 	int		minus;
 	double	natural_num;
 	double	decimal_num;
 	char	**str;
 
 	str = ft_split(src, '.');
-	if (is_invalid(str))
+	if (is_invalid(str, 0) || is_invalid(str, 1))
 		wrong_type_error();
 	minus = 1;
 	natural_num = 0.0;
@@ -73,11 +65,7 @@ double	ft_strtod(char	*src)
 			minus = -1;
 	}
 	if (str[1])
-	{
-		i = ft_strlen(str[1]);
-		decimal_num = ft_atoi(str[1]);
-		decimal_num /= pow(10, i);
-	}
+		decimal_num = ft_atoi(str[1]) / pow(10, ft_strlen(str[1]));
 	if (natural_num < 0)
 		natural_num *= -1;
 	free_all(str);
