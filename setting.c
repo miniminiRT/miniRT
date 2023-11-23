@@ -47,53 +47,6 @@ void	set_ambient(t_scene *scene, char **res)
 	return ;
 }
 
-void	set_light_list(t_scene *scene, t_light *lights)
-{
-	t_light	*iter;
-
-	if (!scene->lights)
-		scene->lights = lights;
-	else
-	{
-		iter = scene->lights;
-		while (iter->next != NULL)
-			iter = iter->next;
-		iter->next = lights;
-	}
-}
-
-void	set_lights(t_scene *scene, char **res)
-{
-	t_light	*lights;
-	char	**origin;
-	char	**color;
-
-	lights = malloc(sizeof(t_light));
-	if (!lights)
-		exit(1);
-	origin = ft_split(res[1], ',');
-	if (count_dot(res[1]) != 2 || arr_size(origin) != 3)
-		error();
-	color = ft_split(res[3], ',');
-	if (count_dot(res[3]) != 2 || arr_size(color) != 3)
-		error();
-	lights->origin
-		= vec(ft_strtod(origin[0]), ft_strtod(origin[1]), ft_strtod(origin[2]));
-	lights->brightness = ft_strtod(res[2]);
-	if (range_check_light(lights->brightness))
-		ratio_error(1);
-	lights->light_color = vec(ft_strtod(color[0]), \
-		ft_strtod(color[1]), ft_strtod(color[2]));
-	if (range_check_color(lights->light_color.x)
-		|| range_check_color(lights->light_color.y)
-		|| range_check_color(lights->light_color.z))
-		ratio_error(2);
-	lights->next = NULL;
-	free_all(origin);
-	free_all(color);
-	set_light_list(scene, lights);
-}
-
 void	set_objects(t_scene *scene, char **res, int *id)
 {
 	if (ft_strncmp(res[0], "sp", 2) == 0)
