@@ -23,6 +23,7 @@ SRC			=	main.c \
 				setting_cylinder.c \
 				setting_sphere.c \
 				setting_scene.c \
+				setting_light.c \
 				error.c \
 				check_range.c \
 				./print_scene/print_scene.c \

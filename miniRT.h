@@ -263,5 +263,6 @@ int get_root(t_util *util, t_hit_record *rec);
 void	change_location(t_vars  *vars, int keycode);
 void	change_angle(t_vars  *vars, int keycode);
 void	get_src_for_disciminant(t_util	*util, t_ray ray, t_cylinder *cy);
-
+void	set_light_list(t_scene *scene, t_light *lights);
+void	light_vec_check(char **res, char **origin, char **color);
 #endif
