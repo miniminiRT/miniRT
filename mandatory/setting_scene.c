@@ -28,6 +28,8 @@ int	file_open(char *argv)
 
 void	set_by_type(t_scene *scene, char **res, int *id)
 {
+	if (!(*res))
+		error();
 	if (ft_strncmp(res[0], "A", 1) == 0)
 		set_ambient(scene, res);
 	else if (ft_strncmp(res[0], "C", 1) == 0)
@@ -55,6 +57,7 @@ t_scene	set_scene(char *argv)
 	while (str)
 	{
 		str = ft_strtrim(str, "\n");
+		line_check(str);
 		res = ft_split(str, ' ');
 		set_by_type(&scene, res, &id);
 		free(str);
