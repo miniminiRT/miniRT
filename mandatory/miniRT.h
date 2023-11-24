@@ -251,7 +251,7 @@ int		count_dot(char *str);
 int		arr_size(char **str);
 void	error(void);
 void	file_name_check(char *f_name);
-
+void	line_check(char *str);
 int		hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);
 int		hit_cylinder(t_hit_record *rec, t_ray ray, t_cylinder *cy);
 t_vec	set_face_normal(t_vec normal, t_ray ray);

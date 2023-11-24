@@ -38,3 +38,11 @@ int	count_dot(char *str)
 	}
 	return (count);
 }
+
+void	line_check(char *str)
+{
+	if (!(*str))
+		error();
+	else
+		return ;
+}
