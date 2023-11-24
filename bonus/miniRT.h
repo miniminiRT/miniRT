@@ -5,7 +5,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include "mlxset.h"
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 enum e_type{
 	SPHERE,

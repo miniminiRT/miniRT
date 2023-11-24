@@ -13,50 +13,92 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 #-------------------------------------------
 
-SRC			=	main.c \
-				utils.c \
-				utils2.c \
-				phong_light.c \
-				setting.c \
-				shadow.c \
-				setting_plane.c \
-				setting_cylinder.c \
-				setting_sphere.c \
-				setting_scene.c \
-				setting_light.c \
-				error.c \
-				check_range.c \
-				./print_scene/print_scene.c \
-				./print_scene/print_scene_utils.c \
-				./hook/key_hook_move.c \
-				./hook/key_hook_rotate.c \
-				./hit_object/plane.c \
-				./hit_object/sphere.c \
-				./hit_object/cylinder.c \
-				./hit_object/utils.c \
-				./operator/vec_operator1.c \
-				./operator/vec_operator2.c \
-				./operator/vec_operator3.c
+SRC			=	mandatory/main.c \
+				mandatory/utils.c \
+				mandatory/utils2.c \
+				mandatory/phong_light.c \
+				mandatory/setting.c \
+				mandatory/shadow.c \
+				mandatory/setting_plane.c \
+				mandatory/setting_cylinder.c \
+				mandatory/setting_sphere.c \
+				mandatory/setting_scene.c \
+				mandatory/setting_light.c \
+				mandatory/error.c \
+				mandatory/check_range.c \
+				mandatory/print_scene/print_scene.c \
+				mandatory/print_scene/print_scene_utils.c \
+				mandatory/hook/key_hook_move.c \
+				mandatory/hook/key_hook_rotate.c \
+				mandatory/hit_object/plane.c \
+				mandatory/hit_object/sphere.c \
+				mandatory/hit_object/cylinder.c \
+				mandatory/hit_object/utils.c \
+				mandatory/operator/vec_operator1.c \
+				mandatory/operator/vec_operator2.c \
+				mandatory/operator/vec_operator3.c
+
+BONUS_SRC	= 	bonus/main.c \
+				bonus/utils.c \
+				bonus/utils2.c \
+				bonus/phong_light.c \
+				bonus/setting.c \
+				bonus/shadow.c \
+				bonus/setting_plane.c \
+				bonus/setting_cylinder.c \
+				bonus/setting_sphere.c \
+				bonus/setting_scene.c \
+				bonus/setting_light.c \
+				bonus/error.c \
+				bonus/check_range.c \
+				bonus/print_scene/print_scene.c \
+				bonus/print_scene/print_scene_utils.c \
+				bonus/hook/key_hook_move.c \
+				bonus/hook/key_hook_rotate.c \
+				bonus/hit_object/plane.c \
+				bonus/hit_object/sphere.c \
+				bonus/hit_object/cylinder.c \
+				bonus/hit_object/utils.c \
+				bonus/operator/vec_operator1.c \
+				bonus/operator/vec_operator2.c \
+				bonus/operator/vec_operator3.c
+
 
 OBJ			=	$(SRC:.c=.o)
+B_OBJ		=	$(BONUS_SRC:.c=.o)
 MLX_DIR 	= minilibx
 MLX			= libmlx.a
-HEADER		= miniRT.h
+HEADER		= mandatory/miniRT.h
+B_HEADER	= bonus/miniRT.h
 OPTION 		= -L./ -lmlx -framework OpenGL -framework AppKit
 LIBFT_DIR	= libft
 LIBFT 		= libft.a
 NAME		= miniRT
+B_NAME		= miniRT
 CC			= cc
 RM 			= rm -rf
 CFLAGS		= -Wall -Wextra -Werror
 
-all:		$(NAME)
+all:		.MAKE_ALL
 
-$(NAME):  $(OBJ) $(HEADER) $(MLX) $(LIBFT)
+bonus:		.MAKE_BONUS
+
+
+.MAKE_ALL:  $(OBJ) $(HEADER) $(MLX) $(LIBFT)
 		cp ./$(MLX_DIR)/$(MLX) $(MLX)
 		cp ./$(LIBFT_DIR)/$(LIBFT) $(LIBFT)
 		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) -I$(HEADER)
 		@echo $(GREEN)"miniRT made." $(EOC)
+		$(RM) ./MAKE_BONUS
+		touch $@
+
+.MAKE_BONUS: $(B_OBJ) $(B_HEADER) $(MLX) $(LIBFT)
+		cp ./$(MLX_DIR)/$(MLX) $(MLX)
+		cp ./$(LIBFT_DIR)/$(LIBFT) $(LIBFT)
+		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(B_OBJ) $(MLX) $(LIBFT) -o $(B_NAME) -I$(B_HEADER)
+		@echo $(GREEN)"miniRT made." $(EOC)
+		$(RM) ./MAKE_ALL
+		touch $@
 
 %.o: 		%.c
 		@$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
@@ -69,17 +111,21 @@ $(LIBFT):
 
 clean:
 		@$(RM) $(OBJ)
+		@$(RM) $(B_OBJ)
 		$(RM) $(MLX)
 		$(RM) $(LIBFT)
 		make clean -C $(MLX_DIR)
 		make fclean -C $(LIBFT_DIR)
+		$(RM) .MAKE_ALL
+		$(RM) .MAKE_BONUS
 		@echo $(GREEN)"cleaned." $(EOC)
 
 fclean:		clean
 		@$(RM) $(NAME)
+		@$(RM) $(B_NAME)
 		@echo $(GREEN)"fcleaned." $(EOC)
 
 re:			$(MAKE) fclean
 			$(MAKE) all
 
-.PHONY:		clean fclean re
+.PHONY:		clean fclean re bonus
