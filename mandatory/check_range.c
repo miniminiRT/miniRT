@@ -23,7 +23,7 @@ int	range_check_degree(double num)
 
 int	range_check_color(double num)
 {
-	if (!(num >= 0.0 && num <= 255.0))
+	if (!(num >= 0.0 && num <= 1.0))
 		return (1);
 	return (0);
 }
