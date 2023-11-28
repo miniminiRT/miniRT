@@ -25,6 +25,7 @@ SRC			=	mandatory/main.c \
 				mandatory/setting_scene.c \
 				mandatory/setting_light.c \
 				mandatory/error.c \
+				mandatory/error2.c \
 				mandatory/check_range.c \
 				mandatory/print_scene/print_scene.c \
 				mandatory/print_scene/print_scene_utils.c \

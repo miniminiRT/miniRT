@@ -6,7 +6,7 @@ void	file_name_check(char *f_name)
 		|| f_name[ft_strlen(f_name) - 2] != 'r'
 		|| f_name[ft_strlen(f_name) - 3] != '.')
 	{
-		error();
+		wrong_type_input();
 		exit(1);
 	}
 }
@@ -42,7 +42,7 @@ int	count_dot(char *str)
 void	line_check(char *str)
 {
 	if (!(*str))
-		error();
+		empty_line();
 	else
 		return ;
 }

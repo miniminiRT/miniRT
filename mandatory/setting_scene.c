@@ -22,14 +22,14 @@ int	file_open(char *argv)
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		error();
+		file_error();
 	return (fd);
 }
 
 void	set_by_type(t_scene *scene, char **res, int *id)
 {
 	if (!(*res))
-		error();
+		empty_line();
 	if (ft_strncmp(res[0], "A", 1) == 0)
 		set_ambient(scene, res);
 	else if (ft_strncmp(res[0], "C", 1) == 0)
@@ -52,7 +52,7 @@ t_scene	set_scene(char *argv)
 	fd = file_open(argv);
 	str = get_next_line(fd);
 	if (!str)
-		error();
+		empty_line();
 	init_scene(&scene);
 	while (str)
 	{

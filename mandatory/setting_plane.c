@@ -4,7 +4,7 @@ void	set_plane_list(t_scene *scene, t_setobj *set, int *id, void *element)
 {
 	set->object = malloc(sizeof(t_object));
 	if (!set->object)
-		exit(1);
+		malloc_error();
 	set->object->id = *id;
 	set->object->type = PLANE;
 	set->object->element = element;
@@ -25,7 +25,7 @@ void	plane_vec_check(char **res, t_setobj set, char **normal)
 	if (count_dot(res[1]) != 2 || arr_size(set.center) != 3 \
 		|| count_dot(res[2]) != 2 || arr_size(normal) != 3 \
 		|| count_dot(res[3]) != 2 || arr_size(set.albedo) != 3)
-		error();
+		three_input_error();
 	return ;
 }
 
@@ -50,7 +50,7 @@ void	set_plane(t_scene *scene, char **res, int *id)
 
 	plane = malloc(sizeof(t_plane));
 	if (!plane)
-		exit(1);
+		malloc_error();
 	set.center = ft_split(res[1], ',');
 	normal = ft_split(res[2], ',');
 	set.albedo = ft_split(res[3], ',');
