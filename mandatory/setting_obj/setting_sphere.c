@@ -1,4 +1,16 @@
-#include "miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting_sphere.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 17:05:45 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/28 17:05:48 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../miniRT.h"
 
 void	set_sphere_list(t_scene *scene, t_setobj *set, int *id, void *element)
 {

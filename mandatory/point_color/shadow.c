@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:10:01 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/22 15:27:17 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/11/28 17:05:06 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 int	hit(t_scene *scene, t_ray r, t_hit_record rec, int id)
 {

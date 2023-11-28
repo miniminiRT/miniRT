@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 16:51:02 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:03:08 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,6 @@ double	ft_strtod(char	*src)
 	free_all(str);
 	return (minus * (natural_num + decimal_num));
 }
-
-// void	error(void)
-// {
-// 	write(2, "error\n", 6);
-// 	exit(1);
-// }
 
 void	free_all(char **arr)
 {

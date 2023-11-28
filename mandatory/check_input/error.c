@@ -6,16 +6,16 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:33:58 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 16:57:20 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:06:31 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 void	wrong_type_double(void)
 {
 	printf("Error\n");
-	print("input value must be double type [00.00]\n");
+	printf("input value must be double type [00.00]\n");
 	exit(1);
 }
 

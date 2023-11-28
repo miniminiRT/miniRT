@@ -15,18 +15,18 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 SRC			=	mandatory/main.c \
 				mandatory/utils.c \
-				mandatory/utils2.c \
-				mandatory/phong_light.c \
-				mandatory/setting.c \
-				mandatory/shadow.c \
-				mandatory/setting_plane.c \
-				mandatory/setting_cylinder.c \
-				mandatory/setting_sphere.c \
-				mandatory/setting_scene.c \
-				mandatory/setting_light.c \
-				mandatory/error.c \
-				mandatory/error2.c \
-				mandatory/check_range.c \
+				mandatory/point_color/phong_light.c \
+				mandatory/point_color/shadow.c \
+				mandatory/setting_obj/setting.c \
+				mandatory/setting_obj/setting_plane.c \
+				mandatory/setting_obj/setting_cylinder.c \
+				mandatory/setting_obj/setting_sphere.c \
+				mandatory/setting_obj/setting_scene.c \
+				mandatory/setting_obj/setting_light.c \
+				mandatory/check_input/error.c \
+				mandatory/check_input/error2.c \
+				mandatory/check_input/check_range.c \
+				mandatory/check_input/utils2.c \
 				mandatory/print_scene/print_scene.c \
 				mandatory/print_scene/print_scene_utils.c \
 				mandatory/hook/key_hook_move.c \
@@ -39,30 +39,30 @@ SRC			=	mandatory/main.c \
 				mandatory/operator/vec_operator2.c \
 				mandatory/operator/vec_operator3.c
 
-BONUS_SRC	= 	bonus/main.c \
-				bonus/utils.c \
-				bonus/utils2.c \
-				bonus/phong_light.c \
-				bonus/setting.c \
-				bonus/shadow.c \
-				bonus/setting_plane.c \
-				bonus/setting_cylinder.c \
-				bonus/setting_sphere.c \
-				bonus/setting_scene.c \
-				bonus/setting_light.c \
-				bonus/error.c \
-				bonus/check_range.c \
-				bonus/print_scene/print_scene.c \
-				bonus/print_scene/print_scene_utils.c \
-				bonus/hook/key_hook_move.c \
-				bonus/hook/key_hook_rotate.c \
-				bonus/hit_object/plane.c \
-				bonus/hit_object/sphere.c \
-				bonus/hit_object/cylinder.c \
-				bonus/hit_object/utils.c \
-				bonus/operator/vec_operator1.c \
-				bonus/operator/vec_operator2.c \
-				bonus/operator/vec_operator3.c
+# BONUS_SRC	= 	bonus/main.c \
+# 				bonus/utils.c \
+# 				bonus/utils2.c \
+# 				bonus/phong_light.c \
+# 				bonus/setting.c \
+# 				bonus/shadow.c \
+# 				bonus/setting_plane.c \
+# 				bonus/setting_cylinder.c \
+# 				bonus/setting_sphere.c \
+# 				bonus/setting_scene.c \
+# 				bonus/setting_light.c \
+# 				bonus/error.c \
+# 				bonus/check_range.c \
+# 				bonus/print_scene/print_scene.c \
+# 				bonus/print_scene/print_scene_utils.c \
+# 				bonus/hook/key_hook_move.c \
+# 				bonus/hook/key_hook_rotate.c \
+# 				bonus/hit_object/plane.c \
+# 				bonus/hit_object/sphere.c \
+# 				bonus/hit_object/cylinder.c \
+# 				bonus/hit_object/utils.c \
+# 				bonus/operator/vec_operator1.c \
+# 				bonus/operator/vec_operator2.c \
+# 				bonus/operator/vec_operator3.c
 
 
 OBJ			=	$(SRC:.c=.o)

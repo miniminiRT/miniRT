@@ -1,4 +1,16 @@
-#include "miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting_cylinder.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 17:05:13 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/28 17:08:27 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../miniRT.h"
 
 void	set_cylinder_list(t_scene *scene, t_setobj *set, int *id, void *element)
 {
@@ -69,4 +81,3 @@ void	set_cylinder(t_scene *scene, char **res, int *id)
 	free_all(normal);
 	set_cylinder_list(scene, &set, id, (void *)cylinder);
 }
-

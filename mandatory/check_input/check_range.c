@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error2.c                                           :+:      :+:    :+:   */
+/*   check_range.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 16:56:52 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 16:57:24 by seojchoi         ###   ########.fr       */
+/*   Created: 2023/11/28 17:04:33 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/28 17:04:37 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
-void	three_input_error(void)
+int	range_check_light(double num)
 {
-	printf("Error\n");
-	printf("you must set input like [a,b,c]\n");
-	exit(1);
+	if (!(num >= 0.0 && num <= 1.0))
+		return (1);
+	return (0);
 }
 
-void	malloc_error(void)
+int	range_check_vector(double num)
 {
-	printf("Error\n");
-	printf("malloc failed\n");
-	exit(1);
+	if (!(num >= -1.0 && num <= 1.0))
+		return (1);
+	return (0);
 }
 
-void	file_error(void)
+int	range_check_degree(double num)
 {
-	printf("Error\n");
-	printf("failed to open file\n");
-	exit(1);
+	if (!(num >= 0.0 && num <= 180.0))
+		return (1);
+	return (0);
 }
 
-void	empty_line(void)
+int	range_check_color(double num)
 {
-	printf("Error\n");
-	printf("empty input is not accepted\n");
-	exit(1);
+	if (!(num >= 0.0 && num <= 1.0))
+		return (1);
+	return (0);
 }
