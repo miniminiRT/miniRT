@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:24:05 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:51:02 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	ft_strtod(char	*src)
 
 	str = ft_split(src, '.');
 	if (is_invalid(str, 0) || is_invalid(str, 1))
-		wrong_type_error();
+		wrong_type_double();
 	minus = 1;
 	natural_num = 0.0;
 	decimal_num = 0.0;

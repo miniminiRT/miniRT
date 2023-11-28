@@ -6,13 +6,13 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:33:58 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/23 21:28:13 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:51:02 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	wrong_type_error(void)
+void	wrong_type_double(void)
 {
 	printf("Error\nwrong_type error\n");  // 나중에 오류 문구 수정
 	exit(1);

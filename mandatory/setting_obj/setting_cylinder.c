@@ -1,10 +1,22 @@
-#include "miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting_cylinder.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 17:05:13 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/28 17:08:27 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../miniRT.h"
 
 void	set_cylinder_list(t_scene *scene, t_setobj *set, int *id, void *element)
 {
 	set->object = malloc(sizeof(t_object));
 	if (!set->object)
-		exit(1);
+		malloc_error();
 	set->object->id = *id;
 	set->object->type = CYLINDER;
 	set->object->element = element;
@@ -25,7 +37,7 @@ void	cylinder_vec_check(char **res, t_setobj set, char **normal)
 	if (count_dot(res[1]) != 2 || arr_size(set.center) != 3 \
 		|| count_dot(res[2]) != 2 || arr_size(normal) != 3 \
 		|| count_dot(res[5]) != 2 || arr_size(set.albedo) != 3)
-		error();
+		three_input_error();
 	return ;
 }
 
@@ -50,7 +62,7 @@ void	set_cylinder(t_scene *scene, char **res, int *id)
 
 	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)
-		error();
+		malloc_error();
 	set.center = ft_split(res[1], ',');
 	normal = ft_split(res[2], ',');
 	set.albedo = ft_split(res[5], ',');
@@ -69,4 +81,3 @@ void	set_cylinder(t_scene *scene, char **res, int *id)
 	free_all(normal);
 	set_cylinder_list(scene, &set, id, (void *)cylinder);
 }
-

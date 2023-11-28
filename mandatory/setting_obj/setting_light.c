@@ -1,4 +1,16 @@
-#include "miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting_light.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 17:05:22 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/28 17:05:24 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../miniRT.h"
 
 void	set_light_list(t_scene *scene, t_light *lights)
 {
@@ -18,9 +30,9 @@ void	set_light_list(t_scene *scene, t_light *lights)
 void	light_vec_check(char **res, char **origin, char **color)
 {
 	if (count_dot(res[1]) != 2 || arr_size(origin) != 3)
-		error();
+		three_input_error();
 	if (count_dot(res[3]) != 2 || arr_size(color) != 3)
-		error();
+		three_input_error();
 	return ;
 }
 
@@ -32,7 +44,7 @@ void	set_lights(t_scene *scene, char **res)
 
 	lights = malloc(sizeof(t_light));
 	if (!lights)
-		exit(1);
+		malloc_error();
 	origin = ft_split(res[1], ',');
 	color = ft_split(res[3], ',');
 	light_vec_check(res, origin, color);

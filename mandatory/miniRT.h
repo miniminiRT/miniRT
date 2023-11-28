@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 17:08:42 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/28 17:08:42 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -231,9 +243,14 @@ void	set_viewport_vector(t_set_viewport *sv, t_scene *scene);
 void	set_print_vector(t_scene *scene, t_print *print_vec, t_set_viewport sv);
 
 // error
-void	wrong_type_error(void);
+void	wrong_type_double(void);
 void	ratio_error(int type);
 void	degree_error(void);
+void	wrong_type_input(void);
+void	three_input_error(void);
+void	malloc_error(void);
+void	file_error(void);
+void	empty_line(void);
 
 // check_range
 int		range_check_light(double num);
@@ -249,7 +266,6 @@ void	free_all(char **arr);
 double	ft_strtod(char *src);
 int		count_dot(char *str);
 int		arr_size(char **str);
-void	error(void);
 void	file_name_check(char *f_name);
 void	line_check(char *str);
 int		hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl);

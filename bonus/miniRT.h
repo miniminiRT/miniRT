@@ -231,7 +231,7 @@ void	set_viewport_vector(t_set_viewport *sv, t_scene *scene);
 void	set_print_vector(t_scene *scene, t_print *print_vec, t_set_viewport sv);
 
 // error
-void	wrong_type_error(void);
+void	wrong_type_double(void);
 void	ratio_error(int type);
 void	degree_error(void);
 
