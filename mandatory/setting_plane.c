@@ -62,6 +62,8 @@ void	set_plane(t_scene *scene, char **res, int *id)
 	plane->color = vec(ft_strtod(set.albedo[0]), \
 		ft_strtod(set.albedo[1]), ft_strtod(set.albedo[2]));
 	plane_vec_range(plane);
+	plane->color = vec(plane->color.x / 255, 
+		plane->color.y / 255, plane->color.z / 255);
 	free_all(set.center);
 	free_all(normal);
 	free_all(set.albedo);
