@@ -64,6 +64,8 @@ void	set_cylinder(t_scene *scene, char **res, int *id)
 	cylinder->color = vec(ft_strtod(set.albedo[0]), \
 		ft_strtod(set.albedo[1]), ft_strtod(set.albedo[2]));
 	cylinder_vec_range(cylinder);
+	cylinder->color = vec(cylinder->color.x / 255, 
+		cylinder->color.y / 255, cylinder->color.z / 255);
 	free_all(set.center);
 	free_all(set.albedo);
 	free_all(normal);

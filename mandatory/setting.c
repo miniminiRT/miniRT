@@ -43,6 +43,9 @@ void	set_ambient(t_scene *scene, char **res)
 		|| range_check_color(scene->ambient.color.y)
 		|| range_check_color(scene->ambient.color.z))
 		ratio_error(2);
+	scene->ambient.color.x = ft_strtod(color[0]) / 255;
+	scene->ambient.color.y = ft_strtod(color[1]) / 255;
+	scene->ambient.color.z = ft_strtod(color[2]) / 255;
 	free_all(color);
 	return ;
 }

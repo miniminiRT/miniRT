@@ -47,6 +47,8 @@ void	set_lights(t_scene *scene, char **res)
 		|| range_check_color(lights->light_color.y)
 		|| range_check_color(lights->light_color.z))
 		ratio_error(2);
+	lights->light_color = vec(lights->light_color.x / 255, 
+		lights->light_color.y / 255, lights->light_color.z / 255);
 	lights->next = NULL;
 	free_all(origin);
 	free_all(color);
