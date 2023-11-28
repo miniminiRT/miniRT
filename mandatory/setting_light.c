@@ -41,14 +41,12 @@ void	set_lights(t_scene *scene, char **res)
 	lights->brightness = ft_strtod(res[2]);
 	if (range_check_light(lights->brightness))
 		ratio_error(1);
-	lights->light_color = vec(ft_strtod(color[0]), \
-		ft_strtod(color[1]), ft_strtod(color[2]));
+	lights->light_color = vec(ft_strtod(color[0]) / 255, \
+		ft_strtod(color[1]) / 255, ft_strtod(color[2]) / 255);
 	if (range_check_color(lights->light_color.x)
 		|| range_check_color(lights->light_color.y)
 		|| range_check_color(lights->light_color.z))
 		ratio_error(2);
-	lights->light_color = vec(lights->light_color.x / 255, 
-		lights->light_color.y / 255, lights->light_color.z / 255);
 	lights->next = NULL;
 	free_all(origin);
 	free_all(color);
