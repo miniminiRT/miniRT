@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:11:41 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/23 16:10:16 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:51:24 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int	main(int argc, char **argv)
 		mlx_loop(vars.mlx);
 	}
 	else
-		error();
+		wrong_type_input();
 	return (0);
 }

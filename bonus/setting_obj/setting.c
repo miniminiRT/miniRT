@@ -1,4 +1,16 @@
-#include "miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setting.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 17:05:53 by seojchoi          #+#    #+#             */
+/*   Updated: 2023/11/28 17:05:56 by seojchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../miniRT.h"
 
 void	set_camera(t_scene *scene, char **res)
 {
@@ -7,12 +19,12 @@ void	set_camera(t_scene *scene, char **res)
 
 	origin = ft_split(res[1], ',');
 	if (count_dot(res[1]) != 2 || arr_size(origin) != 3)
-		error();
+		three_input_error();
 	scene->camera.origin
 		= vec(ft_strtod(origin[0]), ft_strtod(origin[1]), ft_strtod(origin[2]));
 	dir = ft_split(res[2], ',');
 	if (count_dot(res[2]) != 2 || arr_size(dir) != 3)
-		error();
+		three_input_error();
 	scene->camera.dir
 		= vec(ft_strtod(dir[0]), ft_strtod(dir[1]), ft_strtod(dir[2]));
 	if (range_check_vector(scene->camera.dir.x)
@@ -32,13 +44,13 @@ void	set_ambient(t_scene *scene, char **res)
 
 	color = ft_split(res[2], ',');
 	if (count_dot(res[2]) != 2 || arr_size(color) != 3)
-		error();
+		three_input_error();
 	scene->ambient.light_ratio = ft_strtod(res[1]);
 	if (range_check_light(scene->ambient.light_ratio))
 		ratio_error(1);
-	scene->ambient.color.x = ft_strtod(color[0]);
-	scene->ambient.color.y = ft_strtod(color[1]);
-	scene->ambient.color.z = ft_strtod(color[2]);
+	scene->ambient.color.x = ft_strtod(color[0]) / 255;
+	scene->ambient.color.y = ft_strtod(color[1]) / 255;
+	scene->ambient.color.z = ft_strtod(color[2]) / 255;
 	if (range_check_color(scene->ambient.color.x)
 		|| range_check_color(scene->ambient.color.y)
 		|| range_check_color(scene->ambient.color.z))

@@ -19,7 +19,6 @@ int	set_cylinder_rec(t_hit_record *rec, t_ray ray, t_cylinder *cy, int type)
 {
 	t_vec	cp;
 	t_vec	qp;
-	t_vec	n;
 
 	rec->p = ray_at(ray, rec->t);
 	rec->albedo = cy->color;
@@ -28,15 +27,10 @@ int	set_cylinder_rec(t_hit_record *rec, t_ray ray, t_cylinder *cy, int type)
 		cp = vec_sub(rec->p, cy->base_center);
 		qp = vec_sub(cp, vec_mul(cy->h, vec_dot(cp, cy->h)));
 		rec->normal = vec_unit(qp);
-		rec->normal = set_face_normal(rec->normal, ray);
 	}
-	else if (type == TOP)
-		rec->normal = cy->normal;
-	else if (type == BASE)
-	{
-		n = vec_mul(cy->normal, -1);
-		rec->normal = n;
-	}
+	else
+		rec->normal = vec_unit(cy->normal);
+	rec->normal = set_face_normal(rec->normal, ray);
 	return (1);
 }
 
