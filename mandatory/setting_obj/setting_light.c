@@ -33,6 +33,8 @@ void	light_vec_check(char **res, char **origin, char **color)
 		three_input_error();
 	if (count_dot(res[3]) != 2 || arr_size(color) != 3)
 		three_input_error();
+	if (tp_arr_size(res) != 4)
+		input_arg_count_error();
 	return ;
 }
 

@@ -12,6 +12,10 @@
 
 #include "../miniRT.h"
 
+
+#define WIDTH 1000
+#define HEIGHT 562
+
 int	check_is_hit(t_ray ray, t_scene *scene, t_object *obj)
 {
 	int	is_hit;
@@ -52,6 +56,23 @@ int	ray_color(t_ray ray, t_scene *scene)
 	}
 	color = phong_light(scene, tmp_id);
 	return (rgb_to_color(color));
+}
+
+t_vec	screen2view(t_camera *cam, int x, int y, t_set_viewport *sv)
+{
+	t_vec	exchange_point;
+
+	cam->ratio = WIDTH / HEIGHT;
+	cam->x_axis = vec_mul(sv->u, cam->fov * 2.0 * cam->ratio);
+	cam->y_axis = vec_mul(sv->v, cam->fov * 2.0);
+	cam->left_top = vec_add(vec_mul(cam->x_axis, -0.5), \
+		vec_mul(cam->y_axis, 0.5));
+	cam->left_top = vec_add(sv->w, cam->left_top);
+	cam->change_x = vec_div(cam->x_axis, WIDTH);
+	cam->change_y = vec_div(cam->y_axis, HEIGHT);
+	exchange_point = vec_add(cam->left_top, vec_mul(cam->change_x, x));
+	exchange_point = vec_add(exchange_point, vec_mul(cam->change_y, -1 * y));
+	return (exchange_point);
 }
 
 void	print_scene(t_scene *scene, t_data image)

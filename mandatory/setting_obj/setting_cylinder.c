@@ -38,6 +38,8 @@ void	cylinder_vec_check(char **res, t_setobj set, char **normal)
 		|| count_dot(res[2]) != 2 || arr_size(normal) != 3 \
 		|| count_dot(res[5]) != 2 || arr_size(set.albedo) != 3)
 		three_input_error();
+	if (tp_arr_size(res) != 6)
+		input_arg_count_error();
 	return ;
 }
 

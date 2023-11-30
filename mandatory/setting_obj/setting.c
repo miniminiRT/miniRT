@@ -18,6 +18,8 @@ void	set_camera(t_scene *scene, char **res)
 	char	**dir;
 
 	origin = ft_split(res[1], ',');
+	if (tp_arr_size(res) != 4)
+		input_arg_count_error();
 	if (count_dot(res[1]) != 2 || arr_size(origin) != 3)
 		three_input_error();
 	scene->camera.origin
@@ -45,6 +47,8 @@ void	set_ambient(t_scene *scene, char **res)
 	color = ft_split(res[2], ',');
 	if (count_dot(res[2]) != 2 || arr_size(color) != 3)
 		three_input_error();
+	if (tp_arr_size(res) != 3)
+		input_arg_count_error();
 	scene->ambient.light_ratio = ft_strtod(res[1]);
 	if (range_check_light(scene->ambient.light_ratio))
 		ratio_error(1);
@@ -73,13 +77,14 @@ void	set_objects(t_scene *scene, char **res, int *id)
 
 void	set_viewport(t_scene *scene)
 {
-	double	theta;
-	double	h;
+	// double	theta;
+	// double	h;
 
-	theta = (scene->camera.fov * M_PI) / 180.0;
-	h = tan(theta / 2);
+	// theta = (scene->camera.fov * M_PI) / 180.0;
+	// h = tan(theta / 2);
 	scene->viewport.focal_length = 1.0;
-	scene->viewport.height = 2.0 * h * scene->viewport.focal_length;
+	// scene->viewport.height = 2.0 * h * scene->viewport.focal_length;
+	scene->viewport.height = 2.0 * tan(scene->camera.fov / 360 * M_PI);
 	scene->viewport.width = scene->size.aspect_ratio * scene->viewport.height;
 	return ;
 }

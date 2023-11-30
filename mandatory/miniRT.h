@@ -33,8 +33,8 @@ typedef struct s_vec{
 }	t_vec;
 
 typedef struct s_viewport{
-	int		width;
-	int		height;
+	double		width;
+	double		height;
 	double	focal_length;
 }	t_viewport;
 
@@ -48,6 +48,12 @@ typedef struct s_size
 typedef struct s_camera{
 	t_vec	origin;
 	t_vec	dir;
+	t_vec	x_axis;
+	t_vec	y_axis;
+	double	ratio;
+	t_vec	left_top;
+	t_vec	change_x;
+	t_vec	change_y;
 	double	fov;
 }	t_camera;
 
@@ -262,6 +268,9 @@ t_scene	set_scene(char *argv);
 void	print_scene(t_scene *scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
 
+
+void	input_arg_count_error(void);
+int		tp_arr_size(char **arr);
 void	free_all(char **arr);
 double	ft_strtod(char *src);
 int		count_dot(char *str);
