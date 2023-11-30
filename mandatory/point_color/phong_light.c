@@ -65,6 +65,8 @@ t_vec	phong_light(t_scene	*scene, int id)
 	t_vec	light_sum;
 	t_light	*tmp;
 	int		is_shadow;
+	int		cnt_shadow = 0;
+	t_vec	shadow_color = vec(0.1, 0.1, 0.1);
 
 	light_color = vec(0, 0, 0);
 	tmp = scene->lights;
@@ -76,8 +78,13 @@ t_vec	phong_light(t_scene	*scene, int id)
 		light_color = \
 			vec_add(light_color, point_light_get(scene, tmp, id, &is_shadow));
 		if (is_shadow == 1)
-			break ;
+			cnt_shadow++;
 		tmp = tmp->next;
+	}
+	while (cnt_shadow--)
+	{
+		shadow_color = vec_sub(shadow_color, vec(0.05, 0.05, 0.05));
+		light_color = shadow_color;
 	}
 	light_color = vec_add(light_color, vec_mul(scene->ambient.color, KA));
 	light_sum = vec_mul_vec(light_color, scene->rec.albedo);
