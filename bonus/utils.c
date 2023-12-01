@@ -35,6 +35,8 @@ int	is_invalid(char **str, int idx)
 {
 	int	i;
 
+	if (tp_arr_size(str) > 2)
+		return (1);
 	i = 0;
 	if (idx == 0)
 	{
