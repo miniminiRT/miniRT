@@ -6,13 +6,11 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:20:24 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/12/01 14:48:25 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:57:54 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
-
-
 #define WIDTH 1000
 #define HEIGHT 562
 
