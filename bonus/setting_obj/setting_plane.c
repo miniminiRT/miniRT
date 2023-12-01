@@ -38,6 +38,8 @@ void	plane_vec_check(char **res, t_setobj set, char **normal)
 		|| count_dot(res[2]) != 2 || arr_size(normal) != 3 \
 		|| count_dot(res[3]) != 2 || arr_size(set.albedo) != 3)
 		three_input_error();
+	if (tp_arr_size(res) != 4)
+		input_arg_count_error();
 	return ;
 }
 

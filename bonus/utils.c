@@ -19,6 +19,18 @@ t_vec	set_face_normal(t_vec normal, t_ray ray)
 	return (normal);
 }
 
+int	tp_arr_size(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != 0)
+	{
+		i++;
+	}
+	return (i);
+}
+
 int	is_invalid(char **str, int idx)
 {
 	int	i;

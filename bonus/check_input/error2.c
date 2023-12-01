@@ -39,3 +39,9 @@ void	empty_line(void)
 	printf("empty input is not accepted\n");
 	exit(1);
 }
+void input_arg_count_error(void)
+{
+	printf("Error\n");
+	printf("input_arg_count_error\n");
+	exit(1);
+}

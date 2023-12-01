@@ -39,30 +39,31 @@ SRC			=	mandatory/main.c \
 				mandatory/operator/vec_operator2.c \
 				mandatory/operator/vec_operator3.c
 
-# BONUS_SRC	= 	bonus/main.c \
-# 				bonus/utils.c \
-# 				bonus/utils2.c \
-# 				bonus/phong_light.c \
-# 				bonus/setting.c \
-# 				bonus/shadow.c \
-# 				bonus/setting_plane.c \
-# 				bonus/setting_cylinder.c \
-# 				bonus/setting_sphere.c \
-# 				bonus/setting_scene.c \
-# 				bonus/setting_light.c \
-# 				bonus/error.c \
-# 				bonus/check_range.c \
-# 				bonus/print_scene/print_scene.c \
-# 				bonus/print_scene/print_scene_utils.c \
-# 				bonus/hook/key_hook_move.c \
-# 				bonus/hook/key_hook_rotate.c \
-# 				bonus/hit_object/plane.c \
-# 				bonus/hit_object/sphere.c \
-# 				bonus/hit_object/cylinder.c \
-# 				bonus/hit_object/utils.c \
-# 				bonus/operator/vec_operator1.c \
-# 				bonus/operator/vec_operator2.c \
-# 				bonus/operator/vec_operator3.c
+BONUS_SRC	= 	bonus/main.c \
+				bonus/utils.c \
+				bonus/point_color/phong_light.c \
+				bonus/point_color/shadow.c \
+				bonus/setting_obj/setting.c \
+				bonus/setting_obj/setting_plane.c \
+				bonus/setting_obj/setting_cylinder.c \
+				bonus/setting_obj/setting_sphere.c \
+				bonus/setting_obj/setting_scene.c \
+				bonus/setting_obj/setting_light.c \
+				bonus/check_input/error.c \
+				bonus/check_input/error2.c \
+				bonus/check_input/check_range.c \
+				bonus/check_input/utils2.c \
+				bonus/print_scene/print_scene.c \
+				bonus/print_scene/print_scene_utils.c \
+				bonus/hook/key_hook_move.c \
+				bonus/hook/key_hook_rotate.c \
+				bonus/hit_object/plane.c \
+				bonus/hit_object/sphere.c \
+				bonus/hit_object/cylinder.c \
+				bonus/hit_object/utils.c \
+				bonus/operator/vec_operator1.c \
+				bonus/operator/vec_operator2.c \
+				bonus/operator/vec_operator3.c
 
 
 OBJ			=	$(SRC:.c=.o)
@@ -88,7 +89,7 @@ bonus:		.MAKE_BONUS
 .MAKE_ALL:  $(OBJ) $(HEADER) $(MLX) $(LIBFT)
 		cp ./$(MLX_DIR)/$(MLX) $(MLX)
 		cp ./$(LIBFT_DIR)/$(LIBFT) $(LIBFT)
-		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) -I$(HEADER)
+		$(CC) $(CFLAGS) $(OPTION) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) -I$(HEADER)
 		@echo $(GREEN)"miniRT made." $(EOC)
 		$(RM) ./MAKE_BONUS
 		touch $@
@@ -96,7 +97,7 @@ bonus:		.MAKE_BONUS
 .MAKE_BONUS: $(B_OBJ) $(B_HEADER) $(MLX) $(LIBFT)
 		cp ./$(MLX_DIR)/$(MLX) $(MLX)
 		cp ./$(LIBFT_DIR)/$(LIBFT) $(LIBFT)
-		$(CC) $(CFLAGS) -g -fsanitize=address $(OPTION) $(B_OBJ) $(MLX) $(LIBFT) -o $(B_NAME) -I$(B_HEADER)
+		$(CC) $(CFLAGS) $(OPTION) $(B_OBJ) $(MLX) $(LIBFT) -o $(B_NAME) -I$(B_HEADER)
 		@echo $(GREEN)"miniRT made." $(EOC)
 		$(RM) ./MAKE_ALL
 		touch $@

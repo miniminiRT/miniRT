@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 12:02:41 by jonhan            #+#    #+#             */
-/*   Updated: 2023/11/30 16:36:37 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:31:52 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_vec	phong_light(t_scene	*scene, int id)
 		light_color = \
 			vec_add(light_color, point_light_get(scene, tmp, id, &is_shadow));
 		if (is_shadow == 1)
-			break;
+			break ;
 		tmp = tmp->next;
 	}
 	light_color = vec_add(light_color, vec_mul(scene->ambient.color, KA));
