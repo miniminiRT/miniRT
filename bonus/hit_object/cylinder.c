@@ -43,7 +43,7 @@ int	is_base(t_hit_record *rec, t_ray ray, t_cylinder *cy, t_vec center)
 
 	n = vec_mul(cy->normal, -1);
 	denom = vec_dot(n, vec_mul(ray.dir, -1));
-	if (denom > 0)
+	if (denom > EPSILON)
 	{
 		t = vec_dot(center, n) - vec_dot(n, ray.origin);
 		t /= vec_dot(n, ray.dir);
@@ -69,7 +69,7 @@ int	is_top(t_hit_record *rec, t_ray ray, t_cylinder *cy, t_vec center)
 	double	s;
 
 	denom = vec_dot(cy->normal, vec_mul(ray.dir, -1));
-	if (denom > 0)
+	if (denom > EPSILON)
 	{
 		t = vec_dot(center, cy->normal) - vec_dot(cy->normal, ray.origin);
 		t /= vec_dot(cy->normal, ray.dir);

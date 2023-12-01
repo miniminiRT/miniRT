@@ -14,7 +14,6 @@
 
 #define LUMEN 3
 #define KA 0.1
-#define EPSILON 1e-6
 #define KSN 64
 #define KS 0.5
 

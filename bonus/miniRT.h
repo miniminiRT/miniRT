@@ -19,6 +19,8 @@
 # include "mlxset.h"
 # include "../libft/libft.h"
 
+#define EPSILON 1e-6
+
 enum e_type{
 	SPHERE,
 	PLANE,

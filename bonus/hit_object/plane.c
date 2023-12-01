@@ -18,7 +18,7 @@ int	hit_plane(t_hit_record *rec, t_ray ray, t_plane *pl)
 	double	t;
 
 	denom = vec_dot(pl->normal, vec_mul(ray.dir, -1));
-	if (denom > 0)
+	if (denom > EPSILON)
 	{
 		t = vec_dot(pl->point, pl->normal) - vec_dot(pl->normal, ray.origin);
 		t /= vec_dot(pl->normal, ray.dir);
