@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:11:41 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 16:51:24 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:26:45 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int argc, char **argv)
 		vars.update = scene;
 		print_scene(&scene, vars.image);
 		mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
+		// free_scene(&scene);
 		mlx_key_hook(vars.win, key_hook, &vars);
 		mlx_hook(vars.win, 17, 0, exit_hook, &vars);
 		mlx_loop(vars.mlx);
