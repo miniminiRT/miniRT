@@ -32,6 +32,16 @@ void	set_sphere_list(t_scene *scene, t_setobj *set, int *id, void *element)
 	}
 }
 
+void	sphere_vec_check(char **res, t_setobj set)
+{
+	if (count_dot(res[1]) != 2 || arr_size(set.center) != 3 \
+		|| count_dot(res[3]) != 2 || arr_size(set.albedo) != 3)
+		three_input_error();
+	if (tp_arr_size(res) != 4)
+		input_arg_count_error();
+	return ;
+}
+
 void	set_sphere(t_scene *scene, char **res, int *id)
 {
 	t_sphere	*sphere;
@@ -41,14 +51,11 @@ void	set_sphere(t_scene *scene, char **res, int *id)
 	if (!sphere)
 		malloc_error();
 	set.center = ft_split(res[1], ',');
-	if (count_dot(res[1]) != 2 || arr_size(set.center) != 3)
-		three_input_error();
 	sphere->center = vec(ft_strtod(set.center[0]), \
 		ft_strtod(set.center[1]), ft_strtod(set.center[2]));
 	sphere->radius = ft_strtod(res[2]) / 2;
 	set.albedo = ft_split(res[3], ',');
-	if (count_dot(res[3]) != 2 || arr_size(set.albedo) != 3)
-		three_input_error();
+	sphere_vec_check(res, set);
 	sphere->albedo = vec(ft_strtod(set.albedo[0]) / 255, \
 		ft_strtod(set.albedo[1]) / 255, ft_strtod(set.albedo[2]) / 255);
 	if (range_check_color(sphere->albedo.x)
