@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:08:42 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 17:08:42 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:01:04 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <fcntl.h>
 # include "mlxset.h"
 # include "../libft/libft.h"
-
-#define EPSILON 1e-6
+# define EPSILON 1e-6
 
 enum e_type{
 	SPHERE,
@@ -37,7 +36,7 @@ typedef struct s_vec{
 typedef struct s_viewport{
 	double		width;
 	double		height;
-	double	focal_length;
+	double		focal_length;
 }	t_viewport;
 
 typedef struct s_size
@@ -221,7 +220,7 @@ int		hit_sphere(t_hit_record *rec, t_ray ray, t_sphere *sp);
 int		in_shadow(t_scene *scene, t_ray r, double light_len, int id);
 t_vec	reflect(t_vec v, t_vec n);
 t_vec	point_light_get(t_scene *scene, t_light *light, int id, int *is_shadow);
-t_vec	phong_light(t_scene	*scene, int id);
+t_vec	phong_light(t_scene	*scene, int id, int is_shadow);
 
 // vec_operator1
 t_vec	vec(double x, double y, double z);
@@ -269,7 +268,6 @@ int		range_check_color(double num);
 t_scene	set_scene(char *argv);
 void	print_scene(t_scene *scene, t_data image);
 void	my_mlx(t_data *data, int x, int y, int color);
-
 
 void	input_arg_count_error(void);
 int		tp_arr_size(char **arr);
