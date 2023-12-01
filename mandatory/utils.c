@@ -6,7 +6,7 @@
 /*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:54:21 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 17:03:08 by seojchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:35:39 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	free_all(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i] == 0)
+	while (arr[i])
 	{
 		free(arr[i]);
 		i++;

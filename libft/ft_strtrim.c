@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonhan <jonhan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seojchoi <seojchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:43:45 by seojchoi          #+#    #+#             */
-/*   Updated: 2023/11/23 20:23:34 by jonhan           ###   ########.fr       */
+/*   Updated: 2023/12/01 15:32:04 by seojchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!new)
 		exit(1);
 	ft_strlcpy (new, &s1[start], end - start + 1);
+	free((void *)s1);
 	return (new);
 }
